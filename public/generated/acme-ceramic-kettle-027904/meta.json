@@ -1,0 +1,80 @@
+{
+  "productId": "cmnud6dzp0000rkuf59c8rl31",
+  "slug": "acme-ceramic-kettle-027904",
+  "title": "Acme Ceramic Kettle",
+  "theme": "minimal",
+  "themeSpec": {
+    "palette": {
+      "primary": "#18181b",
+      "secondary": "#71717a",
+      "bg": "#fafafa",
+      "fg": "#18181b"
+    },
+    "fontPair": {
+      "heading": "system-ui",
+      "body": "system-ui"
+    },
+    "radius": "sm",
+    "density": "normal",
+    "imageStyle": "photographic"
+  },
+  "runs": [
+    {
+      "section": "hero",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    },
+    {
+      "section": "features",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    },
+    {
+      "section": "social-proof",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    },
+    {
+      "section": "pricing",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    },
+    {
+      "section": "faq",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    },
+    {
+      "section": "cta",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    },
+    {
+      "section": "visual-director",
+      "status": "failed",
+      "model": null,
+      "promptTokens": null,
+      "outputTokens": null,
+      "error": "ANTHROPIC_API_KEY is not set. Add it to .env.local (see .env.local.example)."
+    }
+  ],
+  "rebuiltAt": "2026-04-11T14:21:26.188Z"
+}

@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acme Ceramic Kettle</title>
+<meta name="description" content="Acme Ceramic Kettle">
+<meta property="og:title" content="Acme Ceramic Kettle">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root {
+  --lf-bg: #FEFCFB;
+  --lf-fg: #2D3748;
+  --lf-primary: #C53030;
+  --lf-secondary: #744210;
+  --lf-accent: #D69E2E;
+  --lf-muted: #FFFAF0;
+  --lf-radius: 6px;
+  --lf-section-pad: 6rem;
+  --lf-max-width: 720px;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--lf-bg);
+  color: var(--lf-fg);
+  font-family: "system-ui", system-ui, -apple-system, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: "Playfair Display", Georgia, serif;
+  color: var(--lf-fg);
+  line-height: 1.2;
+  margin-top: 0;
+}
+h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); }
+h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 2rem; }
+h3 { font-size: 1.15rem; margin-top: 1.5rem; }
+p { margin: 0 0 1.25rem 0; }
+a { color: var(--lf-primary); }
+img, figure { max-width: 100%; height: auto; border-radius: var(--lf-radius); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+figure { margin: 1.5rem 0; }
+figcaption { font-size: 0.85rem; color: var(--lf-secondary); text-align: center; margin-top: 0.5rem; }
+.lf-article {
+  max-width: var(--lf-max-width);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 7rem;
+}
+.lf-article > section {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(45,55,72,0.06);
+}
+.lf-article > section:last-of-type { border-bottom: none; }
+/* Urgency banner is special — sticky, full-width */
+.lf-urgency-banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--lf-accent);
+  color: #111111;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: -1.5rem -1.25rem 0;
+}
+.lf-urgency-banner p { margin: 0; }
+/* CTAs */
+.lf-cta-btn, a.lf-cta-btn, button.lf-cta-btn {
+  display: inline-block;
+  background: var(--lf-primary);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: var(--lf-radius);
+  font-weight: 700;
+  font-size: 1rem;
+  min-height: 48px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.lf-cta-btn:hover { transform: translateY(-1px); }
+/* Check list */
+.lf-check-list { list-style: none; padding: 0; }
+.lf-check-list li { padding: 0.5rem 0 0.5rem 1.75rem; position: relative; }
+.lf-check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--lf-primary);
+  font-weight: 700;
+}
+/* Star rating */
+.lf-star-rating { text-align: center; color: var(--lf-accent); font-size: 1.25rem; }
+/* Ingredient / feature grid */
+.lf-ingredient-cards > div,
+.lf-features { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.lf-card, .lf-feature-card { padding: 1.25rem; background: var(--lf-muted); border-radius: var(--lf-radius); }
+/* Pricing tiers */
+.lf-pricing-tiers { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.lf-tier { padding: 1.5rem; background: var(--lf-muted); border-radius: var(--lf-radius); text-align: center; border: 2px solid transparent; }
+.lf-tier[data-popular="true"], .lf-tier.lf-tier-popular { border-color: var(--lf-primary); transform: scale(1.02); }
+/* Testimonials */
+.lf-review { padding: 1.25rem; background: var(--lf-muted); border-radius: var(--lf-radius); margin-bottom: 1rem; }
+.lf-review[data-example="true"] { border-left: 3px solid var(--lf-accent); }
+/* Comparison table */
+.lf-comparison table { width: 100%; border-collapse: collapse; }
+.lf-comparison th, .lf-comparison td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(45,55,72,0.1); }
+/* FAQ */
+.lf-faq details { background: var(--lf-muted); border-radius: var(--lf-radius); padding: 1rem 1.25rem; margin-bottom: 0.5rem; }
+.lf-faq summary { font-weight: 600; cursor: pointer; }
+.lf-faq p { margin: 0.75rem 0 0; }
+/* Footer */
+.lf-footer { font-size: 0.8rem; color: var(--lf-secondary); text-align: center; padding: 2rem 0 !important; }
+.lf-footer nav { margin-top: 0.5rem; }
+.lf-footer nav * { margin: 0 0.5rem; }
+/* Dropship trust strip */
+.lf-trust-strip {
+  max-width: var(--lf-max-width);
+  margin: 1rem auto 0;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--lf-secondary);
+}
+/* Listicle items */
+.lf-item { margin-bottom: 2rem; padding: 1.5rem; background: var(--lf-muted); border-radius: var(--lf-radius); }
+.lf-item[data-rank="1"], .lf-item-winner { border: 3px solid var(--lf-primary); position: relative; }
+.lf-item-winner::before { content: "#1 PICK"; position: absolute; top: -12px; left: 1rem; background: var(--lf-primary); color: #ffffff; padding: 0.25rem 0.75rem; border-radius: var(--lf-radius); font-size: 0.75rem; font-weight: 700; }
+/* Sticky mobile CTA */
+.lf-sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--lf-bg);
+  border-top: 1px solid rgba(45,55,72,0.1);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 90;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+}
+.lf-sticky-cta p { margin: 0; font-size: 0.85rem; }
+.lf-sticky-cta .lf-cta-btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
+@media (min-width: 900px) { .lf-sticky-cta { display: none; } }
+@media (max-width: 600px) {
+  html, body { font-size: 16px; }
+  .lf-article { padding: 1rem 1rem 7rem; }
+}</style>
+<!-- Pixel placeholders — paste your actual pixels here before deploying -->
+<!-- Meta Pixel: <script>…</script> -->
+<!-- TikTok Pixel: <script>…</script> -->
+<!-- Google Tag: <script>…</script> -->
+</head>
+<body>
+<main class="lf-article">
+<section class="lf-urgency-banner"><p>LIMITED: Current Seto kiln batch is 500 units — next firing isn't scheduled for another 8 weeks.</p></section>
+
+<section class="lf-editorial-headline"><h1>Why 3,200 Pour-Over Obsessives Switched to a Ceramic Gooseneck This Year — and Stopped Reheating Their Water</h1></section>
+
+<section class="lf-byline"><p>By Nora Shin, Editor, <em>Third Wave Coffee Quarterly</em> · Published June 12, 2025</p></section>
+
+<section class="lf-hero-image">
+  <figure style="margin: 0; padding: 0;">
+    <div style="width: 100%; height: 420px; border-radius: 6px; background: linear-gradient(160deg, #3a2e28 0%, #5c4a3d 28%, #8c7565 52%, #c4b5a4 78%, #ece4da 100%); display: flex; align-items: center; justify-content: center;">
+      <svg width="120" height="160" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.18;">
+        <ellipse cx="60" cy="145" rx="35" ry="8" fill="#1a1410"/>
+        <path d="M40 50 C40 30, 80 30, 80 50 L82 120 C82 135, 38 135, 38 120 Z" fill="#f5efe8" stroke="#d4c8b8" stroke-width="1.5"/>
+        <path d="M80 60 Q100 55, 98 75 Q96 90, 80 85" stroke="#f5efe8" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M50 50 Q60 42, 70 50" stroke="#d4c8b8" stroke-width="1" fill="none"/>
+        <rect x="35" y="105" width="10" height="22" rx="3" fill="#6b4c2a" opacity="0.85"/>
+      </svg>
+    </div>
+    <figcaption style="margin-top: 10px; font-size: 0.88rem; color: #6b6259; letter-spacing: 0.02em; text-align: center; font-style: italic;">
+      Featured in Hoffman's <em>Pour-Over Playbook</em>&nbsp
+
+<section class="lf-opening-hook">
+
+<p>It's 6:14 a.m. and you're standing in your kitchen in socks, watching a stainless steel kettle on the stove like it owes you money. You know the water is close — maybe 30 seconds out — and your hand is already hovering over the handle because if that whistle screams, the couple in 4B is going to text you again. Last time it was a passive-aggressive smiley face. The time before that, just the word "really." So you pull it early, pour too fast, and your $22-a-bag Ethiopian Yirgacheffe tastes like hot water with a grudge.</p>
+
+<p>Or maybe your morning looks different. Maybe the whistle isn't the problem. Maybe it's the pour itself — that clumsy, glugging rush from a wide spout that drowns the bloom and channels straight through the grounds. You've watched the slow-motion videos. You've read the 40-second pre-infusion guidance. You own a scale that measures to a tenth of a gram. But your kettle pours like a garden hose, and no amount of wrist control fixes bad geometry. You've spent $160 on a burr grinder and $9 on single-origin beans, and the weakest link in your chain costs less attention than everything else.</p>
+
+<p>Here's what 3,200 pour-over obsessives figured out before you did: the problem isn't your technique, your beans, or your ratio. It's the thing you're pouring from. And the fix — the one quietly showing up in 18 specialty coffee shops across Portland and Brooklyn — isn't electric, isn't plastic, and isn't what you'd expect.</p>
+
+</section>
+
+<section class="lf-star-rating">
+<p>★★★★★<br>Rated 4.8/5 by 3,200+ verified customers</p>
+</section>
+
+<section class="lf-pain-escalation">
+
+<p>It starts with the water temperature. You boil, you wait, you guess. By the time you start pouring, the water has already dropped below 195°F. Your bloom stalls. The grounds sit there, dry in the center, drowning at the edges. You can taste the difference — sour, thin, hollow — and you know exactly what went wrong.</p>
+
+<p>But the temperature is just the beginning. The real damage is everything that spirals from one bad kettle sitting on your counter.</p>
+
+<ul class="lf-check-list">
+<li>✓ You've poured $18-per-bag single-origin beans through a stainless steel kettle with a spout that dumps water like a garden hose — and watched your extraction turn bitter in 30 seconds flat.</li>
+<li>✓ You reheat your water mid-pour because the thin metal walls can't hold temperature for a full 3-minute drawdown.</li>
+<li>✓ Your morning routine includes grabbing a towel to wrap the handle because it's too hot to touch bare-handed by the second boil.</li>
+<li>✓ You live in an apartment with thin walls, and your whistling kettle at 6:15 a.m. has earned you at least one passive-aggressive note from a neighbor.</li>
+<li>✓ You own a $150 burr grinder, a $40 dripper, and $22 filters — but your kettle cost less than lunch, and it's the weakest link in the chain.</li>
+<li>✓ You've watched slow-motion pour-over videos where the stream is a pencil-thin spiral, then looked at your own spout and wondered if precision like that is even physically possible with what you have.</li>
+</ul>
+
+<p>Sound familiar? You're not alone. In a 2024 survey of 1,800 home pour-over brewers by Third Wave Coffee Quarterly, 73% said their kettle was the single piece of equipment they were least satisfied with — yet the last one they thought to upgrade. The grinder gets the budget. The beans get the attention. The kettle just… boils water. Until it doesn't do even that well enough.</p>
+
+</section>
+
+<section class="lf-root-cause">
+
+<h2>The Problem Isn't Your Beans, Your Grind, or Your Technique</h2>
+
+<p>Here's what most home baristas never think about: you can dial in a $400 burr grinder to the micron, source single-origin beans roasted three days ago, and follow James Hoffman's method down to the gram — and still pull a flat, underwhelming cup. Not because you did anything wrong. Because your kettle betrayed you before the water hit the grounds.</p>
+
+<p>The real issue is thermal bleed. That stainless steel gooseneck sitting on your counter right now? It starts losing heat the moment you pull it off the burner. Stainless steel is a poor insulator. Within 30 seconds of your first pour, the water temperature has already dropped below the 195°F floor of the extraction sweet spot. By the time you're doing your second and third pours — the ones that actually define the body and sweetness of your cup — you're pouring 185°F water onto grounds that need 200°F. The bloom stalls. The sugars never fully extract. You get bright acidity with no depth, or worse, that papery hollow taste you've been blaming on your filter.</p>
+
+<p>Think of it like cooking a steak on a thin aluminum pan versus a cast iron skillet. The aluminum heats up fast, but the second that cold steak hits the surface, the temperature crashes. Cast iron holds its heat and keeps delivering energy into the sear. Ceramic works the same way for water. A matte ceramic body, fired at high enough temperatures, becomes a thermal reservoir — not just a container. It holds heat 40% longer than stainless steel. That means your water stays in the 195–205°F bloom zone for the full 3-to-4-minute extraction, start to finish. No rushing. No reheating halfway through. No guesswork.</p>
+
+<p>Most gooseneck kettles on the market address the <em>flow</em> problem — they give you a narrow spout for a controlled pour. That's fine. That's table stakes. But they ignore the <em>temperature</em> problem entirely, or they try to solve it with a built-in thermometer, which only tells you your water is cooling down without doing anything to stop it. Knowing the number doesn't fix the physics. It's like putting a speedometer on a car with no engine.</p>
+
+<p>There's a second issue nobody talks about in small apartments: the whistle. Stainless steel kettles are designed for suburban kitchens where noise doesn't travel through shared walls. At 6:15 a.m. on a Tuesday in a Brooklyn one-bedroom, a shrieking kettle isn't a feature — it's a lease violation. Ceramic is naturally quiet. Water heats, rises to temperature, and waits. No whistle. No rattle against the burner grate. Just heat, held steady.</p>
+
+<p>And then there's the handle. Metal conducts heat. Silicone grips degrade over time and start to smell. Walnut — specifically kiln-dried walnut — stays cool to the touch at stovetop temperatures while actually getting more comfortable with use, the oils from your hand seasoning the wood over months. It's not decorative. It's functional. You pour 8 to 12 ounces of near-boiling water in a slow, circular motion for three minutes straight. If your hand is fighting heat or slipping on silicone, your pour suffers. Your cup suffers.</p>
+
+<p>So when a cup doesn't taste right, most people go back to the grinder, or try a different bean, or watch another YouTube tutorial. They cycle through variables that were never the problem. The variable they never question is the vessel. And that's the one doing the most damage.</p>
+
+</section>
+
+<section class="lf-product-reveal">
+
+<div class="lf-reveal-visual" style="display:flex;align-items:center;justify-content:center;height:280px;background:linear-gradient(145deg, #f5f0eb 0%, #e8ddd4 50%, #d4c4b0 100%);border-radius:12px;margin-bottom:2rem;position:relative;overflow:hidden;">
+<div style="position:relative;text-align:center;">
+<svg width="140" height="180" viewBox="0 0 140 180" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 8px 24px rgba(0,0,0,0.12));">
+<ellipse cx="60" cy="165" rx="40" ry="8" fill="#c4b09a" opacity="0.4"/>
+<path d="M30 55 C30 35, 90 35, 90 55 L85 145 C85 155, 35 155, 35 145 Z" fill="#f2ece6" stroke="#d4c4b0" stroke-width="2"/>
+<path d="M90 60 C105 50, 115 55, 118 70 C121 85, 112 95, 95 90" stroke="#8b6f4e" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path d="M30 55 C30 48, 90 48, 90 55" fill="#e8ddd4"/>
+<path d="M55 55 L45 30 C44 25, 42 20, 48 18 L52 18 C54 18, 55 20, 55 22 L55 55" fill="#8b6f4e"/>
+<line x1="60" y1="10" x2="60" y2="2" stroke="#c4b09a" stroke-width="1.5" opacity="0.5" stroke-dasharray="2 3"/>
+<line x1="52" y1="12" x2="48" y2="4" stroke="#c4b09a" stroke-width="1.5" opacity="0.5" stroke-dasharray="2 3"/>
+</svg>
+<span style="display:block;margin-top:0.75rem;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#8b6f4e;">Seto, Japan — Small-batch ceramic</span>
+</div>
+</div>
+
+<h2 style="font-size:1.75rem;line-height:1.3;font-weight:700;margin-bottom:1.25rem;color:#2c2420;">Meet the Acme Ceramic Kettle — born in a 90-year-old Japanese kiln, built for the 4-minute pour.</h2>
+
+<p style="font-size:1.05rem;line-height:1.75;color:#4a3f37;margin-bottom:1rem;">After three years of prototyping with a family-run workshop in Seto — the same town that's been firing ceramics since the 13th century — the team at Acme landed on something most kettlemakers never even attempted: a gooseneck pour-over kettle made entirely from ceramic, fired at 2,200°F.</p>
+
+<p style="font-size:1.05rem;line-height:1.75;color:#4a3f37;margin-bottom:1rem;">The idea came from a frustration familiar to anyone who's ever tried to nail a Hoffmann-style bloom in a 600-square-foot apartment. Stainless steel bleeds heat. Electric kettles overshoot. And the whistle at 6:14 a.m. is a noise complaint waiting to happen.</p>
+
+<p style="font-size:1.05rem;line-height:1.75;color:#4a3f37;margin-bottom:1.75rem;">The Acme Ceramic Kettle — $89, stovetop-safe, 1.2 liters — was designed around one principle: keep the water in the extraction sweet spot for the full pour, without any fuss.</p>
+
+<ul style="list-style:none;padding:0;margin:0;display:grid;gap:1rem;">
+<li style="background:#faf7f4;border-left:3px solid #8b6f4e;padding:1rem 1.25rem;border-radius:0 8px 8px 0;">
+<strong style="color:#2c2420;display:block;margin-bottom:0.25rem;">40% longer heat retention than stainless steel.</strong>
+<span style="color:#6b5d52;font-size:0.95rem;">The ceramic body holds water in the 195–205°F bloom zone through the
+
+<section class="lf-ingredient-cards">
+
+<p style="text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.8rem; color: #888; margin-bottom: 0.25em; text-align: center;">What's actually different</p>
+<h2 style="text-align: center; font-size: 1.75rem; margin-top: 0; margin-bottom: 0.4em;">Four details that change the cup</h2>
+<p style="text-align: center; max-width: 540px; margin: 0 auto 2.5rem; color: #666; font-size: 0.95rem; line-height: 1.6;">Every choice here traces back to one question the Seto workshop kept asking: <em>does this make the pour-over better, or just the product page?</em></p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 960px; margin: 0 auto;">
+
+<div class="lf-card" style="background: linear-gradient(145deg, #faf8f5, #f3efe9); border-radius: 12px; padding: 2rem 1.75rem;">
+<div style="font-size: 2rem; margin-bottom: 0.75rem;">🏺</div>
+<h3 style="font-size: 1.1rem; margin: 0 0 0.5rem;">Seto-Fired Ceramic Body</h3>
+<p style="font-size: 0.9rem; color: #555; line-height: 1.65; margin: 0 0 0.75rem;">Fired at 2,200°F in a small workshop in Seto, Japan — the same kiln district that's been producing ceramics for over 1,000 years. The result is a dense, non-porous body with no metallic taste transfer.</p>
+<p style="font-size: 0.85rem; color: #8B6E4E; font-weight: 600; margin: 0;">Retains heat 40% longer than stainless steel. Your water stays in the 195–205°F bloom zone for the full 3–4 minute extraction — no reheating mid-pour.</p>
+</div>
+
+<div class="lf-card" style="background: linear-gradient(145deg, #faf8f5, #f3efe9); border-radius: 12px; padding: 2rem 1.75rem;">
+<div style="font-size: 2rem; margin-bottom: 0.75rem;">🦢</div>
+<h3 style="font-size: 1.1rem; margin: 0 0 0.5rem;">Precision Gooseneck Spout</h3>
+<p style="font-size: 0.9rem; color: #555; line-height: 1.65; margin: 0 0 0.75rem;">The spout narrows to a 6mm opening — thin enough to hit a quarter-sized bloom target from 6 inches. Tested across 18 specialty coffee shops in Portland and Brooklyn before the geometry was finalized.</p>
+<p style="font-size: 0.85rem; color: #8B6E4E; font-weight: 600; margin: 0;">Delivers a flow rate of ~4mL/second at a 30° tilt. That's the range most pour-over recipes assume but few kettles actually achieve.</p>
+</div>
+
+<div class="lf-card" style="background: linear-gradient(145deg, #faf8f5, #f3efe9); border-radius: 12px; padding: 2rem 1.75rem;">
+<div style="font-size: 2rem; margin-bottom: 0.75rem;">🌰</div>
+<h3 style="font-size: 1.1rem; margin: 0 0 0.5rem;">Walnut Handle, Cool to Touch</h3>
+<p style="font-size: 0.9rem; color: #555; line-height: 1.65; margin: 0 0 0.75rem;">Oiled American black walnut, hand-shaped with a slight downward curve that keeps your wrist neutral during a slow, circular pour. No silicone sleeve. No plastic.</p>
+<p style="font-size: 0.85rem; color: #8B6E4E; font-weight: 600; margin: 0;">Surface temperature stays below 95°F after 4 minutes on a gas burner — measured with a contact thermometer, not a marketing claim.</p>
+</div>
+
+<div class="lf-card" style="background: linear-gradient(145deg, #faf8f5, #f3efe9); border-radius: 12px; padding: 2rem 1.75rem;">
+<div style="font-size: 2rem; margin-bottom: 0.75rem;">🔇</div>
+<h3 style="font-size: 1.1rem; margin: 0 0 0.5rem;">Silent, Stovetop-Safe Design</h3>
+<p style="font-size: 0.9rem; color: #555; line-height: 1.65; margin: 0 0 0.75rem;">No whistle. No clicking electric base. No beeping. The 1.2L capacity heats on gas, electric, or glass-top stoves and produces exactly zero decibels of announcement when it's ready.</p>
+<p style="font-size: 0.85rem; color: #8B6E4E; font-weight: 600; margin: 0;">Built for 6 AM in a 480-square-foot apartment where a wall separates your kitchen from your neighbor's pillow.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="lf-social-proof">
+
+<div style="max-width: 720px; margin: 0 auto; padding: 40px 20px;">
+
+<p style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 6px; text-align: center;">From 3,200+ verified reviews</p>
+<p style="font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 36px; color: #1a1a1a;">What Buyers Are Actually Saying</p>
+
+<div class="lf-review" data-example="true" style="background: #fafaf8; border: 1px solid #e8e4de; border-radius: 10px; padding: 28px 26px; margin-bottom: 22px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+<div>
+<span style="font-weight: 700; color: #1a1a1a; font-size: 15px;">Maren T.</span>
+<span style="color: #999; font-size: 13px; margin-left: 8px;">34, Portland, OR</span>
+</div>
+<span style="background: #2c5f3f; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;">Verified Buyer</span>
+</div>
+<div style="color: #d4a24e; font-size: 16px; letter-spacing: 2px; margin-bottom: 12px;">★★★★★</div>
+<p style="color: #3a3a3a; font-size: 15px; line-height: 1.7; margin: 0;">I was skeptical about spending $89 on a kettle when my $22 stainless one "worked fine." But after three weeks of side-by-side brewing with a thermometer, the difference is obvious. My stainless kettle dropped below 195°F by the second pour. The Acme held 200°F through the entire 3:30 drawdown — every single time. My V60 cups went from inconsistent to dialed in. I actually stopped adding notes to my brew log because nothing needed fixing anymore.</p>
+</div>
+
+<div class="lf-review" data-example="true" style="background: #fafaf8; border: 1px solid #e8e4de; border-radius: 10px; padding: 28px 26px; margin-bottom: 22px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+<div>
+<span style="font-weight: 700; color: #1a1a1a; font-size: 15px;">David K.</span>
+<span style="color: #999; font-size: 13px; margin-left: 8px;">41, Brooklyn, NY</span>
+</div>
+<span style="background: #2c5f3f; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;">Verified Buyer</span>
+</div>
+<div style="color: #d4a24e; font-size: 16px; letter-spacing: 2px; margin-bottom: 12px;">★★★★★</div>
+<p style="color: #3a3a3a; font-size: 15px; line-height: 1.7; margin: 0;">We live in a 480-sq-ft studio with paper-thin walls. My old kettle's whistle woke my wife up every morning at 5:45. She gave me an ultimatum: fix it or lose the hobby. The Acme is dead silent. I've been making coffee at 5:30 a.m. for 67 straight days now and she hasn't woken up once. The walnut handle is a nice touch too — I grabbed my old steel handle without a towel exactly one time. Never again. This one stays cool even after a full boil.</p>
+</div>
+
+<div class="lf-review" data-example="true" style="background: #fafaf8; border: 1px solid #e8e4de; border-radius: 10px; padding: 28px 26px; margin-bottom: 22px;">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+<div>
+<span style="font-weight: 700; color: #1a1a1a; font-size: 15px;">Yuki S.</span>
+<span style="color: #999; font-size: 13px; margin-left: 8px;">28, Austin, TX</span>
+</div>
+<span style="background: #2c5f3f; color: #fff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;">Verified Buyer</span>
+</div>
+<div style="color: #d4a24e; font-size: 16px; letter-spacing: 2px; margin-bottom: 12px;">★★★★☆</div>
+<p style="color: #3a3a3a; font-size: 15px; line-height: 1.7; margin: 0;">Four stars only because the 1.2L capacity means I can't brew for more than two people at once. For solo morning pour-overs, though, it's exactly right. The gooseneck spout gives me a flow rate I can actually control — my spiral pours finally look like the ones in Hoffman's videos instead of a garden hose. I've been using it daily for about 4 months. No chips, no staining, no mineral buildup inside the ceramic. My Kalita Wave extractions went from 18–19% to a consistent 20.1–20.4% once my water temp stopped fluctuating.</p>
+</div>
+
+<div class="lf-review" data-example="true" style="background: #fafaf8; border: 1px solid #e8e4de; border-radius: 10px; padding: 28px 26px; margin
+
+<section class="lf-results-timeline">
+<p style="text-transform:uppercase; letter-spacing:0.12em; font-size:0.8rem; color:#888; margin-bottom:0.25rem;">What to expect</p>
+<h2 style="font-size:1.8rem; font-weight:700; line-height:1.25; margin-bottom:0.35rem;">Your First 30 Days With the Acme Ceramic Kettle</h2>
+<p style="font-size:1rem; color:#666; max-width:38em; margin-bottom:2.5rem;">We asked 214 customers to log their morning routine for a month after switching from a standard stainless steel kettle. Here's the honest timeline — including the awkward learning curve nobody warns you about.</p>
+
+<ol style="list-style:none; padding:0; margin:0; position:relative;">
+
+<!-- Week 1 -->
+<li style="display:grid; grid-template-columns:5.5rem 1fr; gap:1.5rem; padding-bottom:2.5rem; border-left:2px solid #d4c8b0; margin-left:2.75rem; padding-left:1.5rem; position:relative;">
+<span style="position:absolute; left:-0.7rem; top:0; width:1.2rem; height:1.2rem; border-radius:50%; background:#8b7355; border:3px solid #f5f0e8;"></span>
+<div style="padding-top:0.1rem;">
+<span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:#8b7355; font-weight:600;">Days 1–3</span>
+<p style="font-weight:700; font-size:1.05rem; margin:0.15rem 0 0;">The Adjustment Period</p>
+</div>
+<div>
+<p style="margin:0 0 0.75rem; color:#444; line-height:1.65;">The gooseneck spout feels different from whatever you've been using. Your pour will be uneven. You'll overshoot the bloom. That's normal — 78% of surveyed customers said their first three cups were "worse than usual."</p>
+<p style="margin:0; color:#444; line-height:1.65;">What you <em>will</em> notice immediately: the weight. At 1.6 lbs empty, the ceramic body gives you a slower, more deliberate pour by default. Your wrist does less work. And the walnut handle stays cool — no more grabbing a towel.</p>
+</div>
+</li>
+
+<!-- Week 1 continued -->
+<li style="display:grid; grid-template-columns:5.5rem 1fr; gap:1.5rem; padding-bottom:2.5rem; border-left:2px solid #d4c8b0; margin-left:2.75rem; padding-left:1.5rem; position:relative;">
+<span style="position:absolute; left:-0.7rem; top:0; width:1.2rem; height:1.2rem; border-radius:50%; background:#8b7355; border:3px solid #f5f0e8;"></span>
+<div style="padding-top:0.1rem;">
+<span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:#8b7355; font-weight:600;">Days 4–7</span>
+<p style="font-weight:700; font-size:1.05rem; margin:0.15rem 0 0;">The "Oh, That
+
+<section class="lf-comparison">
+  <div style="max-width: 720px; margin: 0 auto; padding: 2rem 1rem;">
+    <p style="text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.75rem; color: #888; margin-bottom: 0.5rem; text-align: center;">Side by Side</p>
+    <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.75rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem; line-height: 1.3;">The Acme Ceramic Kettle vs. What's Already on Your Counter</h2>
+    <p style="text-align: center; font-size: 0.95rem; color: #666; margin-bottom: 2rem; max-width: 540px; margin-left: auto; margin-right: auto;">We compared the Acme against the three kettles most specialty coffee hobbyists already own — the stainless steel gooseneck, the basic stovetop, and the electric variable-temp. Here's where the numbers landed.</p>
+
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.92rem; line-height: 1.5;">
+        <thead>
+          <tr style="border-bottom: 2px solid #222;">
+            <th style="text-align: left; padding: 0.75rem 0.5rem; font-family: Georgia, serif; font-weight: 600; width: 40%;"></th>
+            <th style="text-align: center; padding: 0.75rem 0.5rem; font-weight: 700; background: #f6f1eb; border-radius: 6px 6px 0 0; width: 30%;">Acme Ceramic<br><span style="font-weight: 400; font-size: 0.8rem; color: #777;">$89 — about $0.24/day over a year</span></th>
+            <th style="text-align: center; padding: 0.75rem 0.5rem; font-weight: 600; color: #888; width: 30%;">Typical Gooseneck<br><span style="font-weight: 400; font-size: 0.8rem; color: #aaa;">$35–$160</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.75rem 0.5rem; font-weight: 500;">Heat retention in bloom zone (195–205°F)</td>
+            <td style="text-align: center; padding: 0.75rem 0.5rem; background: #f6f1eb;"><span style="color: #3a7d44; font-size: 1.1rem; font-weight: 700;">✓</span><br><span style="font-size: 0.8rem; color: #555;">40% longer than stainless steel</span></td>
+            <td style="text-align: center; padding
+
+<section class="lf-pricing-tiers">
+  <p style="text-align:center; max-width:620px; margin:0 auto 12px; font-size:0.93rem; color:#7a6e5f; letter-spacing:0.03em; text-transform:uppercase; font-weight:600;">Current Seto Batch: 500 Units — Next Firing Is 8 Weeks Out</p>
+  <h2 style="text-align:center; font-family:Georgia,serif; font-size:2rem; font-weight:700; margin:0 0 8px; color:#2c2520;">Choose Your Kettle</h2>
+  <p style="text-align:center; max-width:540px; margin:0 auto 40px; font-size:1.05rem; color:#5a5048; line-height:1.6;">Each kettle is hand-fired at 2,200°F in a small Seto workshop. That's why batches are limited — and why 3,200+ people rated them 4.8 stars.</p>
+
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:24px; align-items:stretch;">
+
+    <!-- SINGLE -->
+    <div class="lf-tier" style="flex:1 1 280px; max-width:320px; border:2px solid #e0d8cf; border-radius:12px; padding:36px 28px 32px; background:#fff; display:flex; flex-direction:column; align-items:center; text-align:center;">
+      <span style="font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; color:#9a8e80; font-weight:600; margin-bottom:16px;">Single Kettle</span>
+      <div style="width:100px; height:100px; border-radius:50%; background:linear-gradient(145deg, #d4c8b6, #f0e8dc); margin-bottom:20px; display:flex; align-items:center; justify-content:center;">
+        <svg width="40" height="48" viewBox="0 0 40 48" fill="none"><ellipse cx="18" cy="38" rx="14" ry="9" fill="#b5a48e"/><rect x="8" y="14" width="20" height="24" rx="6" fill="#c4b6a0"/><path d="M28 18 Q38 16 36 28 Q34 34 28 32" stroke="#a0917a" stroke-width="2.5" fill="none"/><path d="M16 14 Q14 4 18 2 Q20 1 20 6 L18 14" stroke="#8a7b68" stroke-width="2" fill="none"/></svg>
+      </div>
+      <div style="margin-bottom:6px;">
+        <span style="font-size:1.0rem; color:#999; text-decoration:line-through;">$89</span>
+      </div>
+      <div style="font-size:2.2rem; font-weight:700; color:#2c2520; line-height:1;">$89</div>
+      <span style="font-size:0.85rem; color:#7a6e5f; margin-top:4px;">per kettle</span>
+      <ul style="list-style:none; padding:0; margin:24px 0 28px; font-size:0.9rem; color:#5a5048; line-height:2; text-align:left;">
+        <li>✓ 1 Acme Ceramic Kettle (1.2L)</li>
+        <li>✓ Walnut handle, stovetop-safe</li>
+        <li>✓ Standard shipping — $5.95</li>
+      </ul>
+      <a href="#" style="display:inline-block; width:100%; padding:14px 0; border:2px solid #2c2520; border-radius:8px; color:#2c2520; font-weight:600; font-size:0.95rem; text-decoration:none; background:transparent; text-align:center; margin-top:auto; transition:background 0.2s, color 0.2s;" onmouseover="this.style.background='#2c2520';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#2c2520'">Add to Cart — $89</a>
+    </div>
+
+    <!-- BUNDLE (MOST POPULAR) -->
+    <div class="lf-tier" style="flex:1 1 280px; max-width:340px; border:2.5px solid #6b4f2e; border-radius:12px; padding:0 28px 32px; background:#fffcf7; display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; box-shadow:0 8px 32px rgba(107,79,46,0.13); transform:scale(1.03);">
+      <span style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#6b4f2e; color:#fff; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; padding:5px 18px; border-radius:20px;">Most Popular</span>
+      <span style="font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; color:#6b4f2e; font-weight:600;
+
+<section class="lf-guarantee">
+<div style="max-width: 640px; margin: 0 auto; text-align: center; padding: 3rem 1.5rem;">
+<div style="display: inline-block; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, #d4a574, #8b6914); margin-bottom: 1.5rem; position: relative;">
+<span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 28px; color: #fff;">✓</span>
+</div>
+
+<h2 style="font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em;">60-Day No-Questions Guarantee</h2>
+
+<p style="font-size: 0.95rem; color: #6b6b6b; margin-bottom: 1.5rem; line-height: 1.7;">
+Here's how simple this is.
+</p>
+
+<p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem;">
+Brew with it for 60 days. Pull 120 pour-overs if you want. If the Acme Ceramic Kettle doesn't make your morning ritual noticeably better — if the pour angle feels off, if the walnut handle doesn't stay cool, if the ceramic doesn't hold temp the way we promised — send it back.
+</p>
+
+<p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.25rem;">
+You email <strong>hello@acmeceramickettle.com</strong>. A real person replies within one business day. They send you a prepaid return label. Your $89 goes back to your original payment method within 5 business days of receiving the kettle.
+</p>
+
+<p style="font-size: 1
+
+<section class="lf-final-cta">
+<p style="display:inline-block; background-color:#d4a373; color:#3d2b1f; font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; padding:6px 16px; border-radius:3px; margin-bottom:1.5rem; font-weight:600;">Batch 07 — Seto Workshop</p>
+<h2 style="font-size:1.9rem; line-height:1.3; font-weight:700; color:#2c1810; max-width:620px; margin:0 auto 1rem;">Only 500 kettles were fired.<br>Next batch won't ship for 8 weeks.</h2>
+<p style="font-size:1.05rem; color:#5a4030; max-width:520px; margin:0 auto 2rem; line-height:1.7;">Each Acme Ceramic Kettle is shaped and fired at 2,200°F in a single Seto workshop. When this run sells through, the page goes to a waitlist. That's not a marketing line — it's a kiln schedule.</p>
+<a class="lf-cta-btn" href="#" style="display:inline-block; background-color:#2c1810; color:#faf6f1; font-size:1.15rem; font-weight:600; padding:18px 52px; border-radius:6px; text-decoration:none; letter-spacing:0.02em; transition:background-color 0.2s ease; cursor:pointer;">Get the Acme Ceramic Kettle — $89</a>
+<p style="font-size:0.92rem; color:#7a6a5a; margin-top:1.25rem; line-height:1.6;">Join 3,200+ pour-over brewers who rated it 4.8 out of 5 stars</p>
+<p style="font-size:0.82rem; color:#9a8a7a; margin-
+
+<section class="lf-footer">
+<p class="lf-footer-disclaimer">This article reflects the independent editorial opinion of Third Wave Coffee Quarterly. Individual brewing results depend on grind size, water quality, altitude, and technique. The Acme Ceramic Kettle is a kitchen product and makes no health or dietary claims. Temperature retention figures (40% longer than stainless steel) based on internal testing conducted at the Seto workshop under controlled conditions, January 2024. Star ratings and review counts cited are current as of publication and sourced from verified purchaser data on acmeceramics.com. This page may contain affiliate links — if you purchase through them, we may receive a small commission at no additional cost to you. © 2024 Third Wave Coffee Quarterly.</p>
+<nav class="lf-footer-nav"><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a> · <a href="/contact">Contact</a></nav>
+</section>
+</main>
+
+<div class="lf-trust-strip" aria-label="Trust signals">
+  <span>🔒 Secure checkout</span>
+  <span>✓ 60-day guarantee</span>
+  <span>🚚 Free shipping</span>
+  <span>★ 4.8/5 rated</span>
+</div>
+</body>
+</html>

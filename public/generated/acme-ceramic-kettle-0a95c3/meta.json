@@ -1,0 +1,80 @@
+{
+  "productId": "cmnud6dzp0000rkuf59c8rl31",
+  "slug": "acme-ceramic-kettle-0a95c3",
+  "title": "Acme Ceramic Kettle",
+  "theme": "editorial",
+  "themeSpec": {
+    "palette": {
+      "primary": "#5C4033",
+      "secondary": "#A0826D",
+      "bg": "#F5F0EB",
+      "fg": "#2B2320"
+    },
+    "fontPair": {
+      "heading": "Georgia",
+      "body": "system-ui"
+    },
+    "radius": "sm",
+    "density": "airy",
+    "imageStyle": "minimal"
+  },
+  "runs": [
+    {
+      "section": "hero",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 447,
+      "outputTokens": 1017,
+      "error": null
+    },
+    {
+      "section": "features",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 446,
+      "outputTokens": 1156,
+      "error": null
+    },
+    {
+      "section": "social-proof",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 454,
+      "outputTokens": 658,
+      "error": null
+    },
+    {
+      "section": "pricing",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 455,
+      "outputTokens": 1063,
+      "error": null
+    },
+    {
+      "section": "faq",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 470,
+      "outputTokens": 1738,
+      "error": null
+    },
+    {
+      "section": "cta",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 409,
+      "outputTokens": 612,
+      "error": null
+    },
+    {
+      "section": "visual-director",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 579,
+      "outputTokens": 72,
+      "error": null
+    }
+  ],
+  "rebuiltAt": "2026-04-11T14:40:51.420Z"
+}

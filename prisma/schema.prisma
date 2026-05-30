@@ -1,0 +1,429 @@
+// Nivara — local-only schema
+// Phase 1: add Brand + BrandDoc alongside the legacy Product/Image models.
+// Legacy models stay until later phases migrate the old routes.
+// See doc/NIVARA-PLAN.md for the phased rollout.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  tagline     String?
+  description String
+  price       String?
+  audience    String?
+  tone        String?
+  links       String?  // JSON-encoded { website, instagram, ... }
+  images      Image[]
+  pages       LandingPage[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Image {
+  id            String    @id @default(cuid())
+  productId     String
+  product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url           String    // public URL (served from /public/uploads/...)
+  kind          String    // "product" | "hero" | "background" | "icon" | "illustration"
+  origin        String    // "uploaded" | "generated"
+  prompt        String?   // Gemini prompt, when origin="generated"
+  analysis      String?   // Claude vision description
+  analysisError String?   // error message when a run failed (null on success)
+  analyzedAt    DateTime? // set after any run (success OR failure) — null means still pending
+  createdAt     DateTime  @default(now())
+
+  @@index([productId])
+}
+
+model LandingPage {
+  id         String     @id @default(cuid())
+  productId  String
+  product    Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  playbookId String?
+  playbook   Playbook?  @relation(fields: [playbookId], references: [id], onDelete: SetNull)
+  slug       String     @unique
+  title      String
+  outputDir  String     // relative path under the project, e.g. "public/generated/acme-widget-xyz"
+  /// Pre-playbook-era: free-form theme name. Still written by old rows,
+  /// superseded by presetId in the playbook world.
+  theme      String?
+  /// Pre-playbook-era: JSON from the visual-director agent. Superseded by
+  /// playbook preset tokens. Kept for backward compat.
+  themeSpec  String?
+  presetId   String?    // which playbook preset was picked
+  intake     String?    // JSON-encoded Record<string, string> — playbook-specific answers
+  status     String     @default("pending") // "pending" | "running" | "done" | "failed"
+  error      String?    // last generation error (null on success)
+  runs       AgentRun[]
+  createdAt  DateTime   @default(now())
+
+  @@index([productId])
+  @@index([playbookId])
+}
+
+/// A Playbook is the recipe for generating one specific *kind* of landing page
+/// (advertorial, listicle, quiz funnel, plain marketing page). It defines:
+/// - the intake questions the user answers on top of the product fields
+/// - the ordered section list each with its own Claude system/directive prompt
+/// - a set of baked presets (palette, fonts, layout tokens)
+/// - which stitcher emits the final HTML
+/// - the copy rules (banned words, style guide, execution directive)
+/// - image-generation slots (for M6 Nano Banana hookup)
+///
+/// Built-in playbooks are seeded on first boot and marked `isBuiltin=true` —
+/// users cannot edit them directly but can duplicate them to a mutable copy.
+model Playbook {
+  id          String   @id @default(cuid())
+  slug        String   @unique // stable identifier, e.g. "generic-landing"
+  name        String
+  type        String   // "generic" | "advertorial" | "listicle" | "quiz" | "custom"
+  description String
+  isBuiltin   Boolean  @default(false)
+  /// Entire playbook definition as a JSON blob — schema lives in
+  /// src/lib/playbooks/schemas.ts and is validated on every read.
+  definition  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  pages LandingPage[]
+}
+
+model AgentRun {
+  id             String      @id @default(cuid())
+  landingPageId  String
+  landingPage    LandingPage @relation(fields: [landingPageId], references: [id], onDelete: Cascade)
+  section        String      // "hero" | "features" | "social-proof" | "pricing" | "faq" | "cta" | "visual-director"
+  status         String      // "pending" | "running" | "done" | "failed"
+  model          String?
+  promptTokens   Int?
+  outputTokens   Int?
+  output         String?     // HTML snippet, or JSON for visual-director
+  imageRequests  String?     // JSON-encoded [{ purpose, prompt, aspectRatio }]
+  error          String?
+  startedAt      DateTime    @default(now())
+  finishedAt     DateTime?
+
+  @@index([landingPageId])
+}
+
+/// A Brand is the top-level container for everything the agents need to know
+/// about a client/product line: brand voice docs, avatars, mechanism explainers,
+/// competitors, a canonical product image. One Brand in single-user mode, but
+/// modeled as 1..N so multi-brand is a future add-on, not a schema rewrite.
+model Brand {
+  id              String              @id @default(cuid())
+  name            String
+  description     String?             // short user-written summary, surfaces on /brand home
+  productImageUrl String?             // permanent canonical product image (served from /public/uploads/brand/...)
+  /// Structured offer data as a JSON blob. Schema lives in
+  /// src/lib/brand/offer.ts. Pulled into every section agent's prompt
+  /// so pricing/guarantee/bonus language comes out of real numbers, not
+  /// hallucinated ones. Null until the user fills the Offer form on /brand.
+  offerData       String?
+  docs            BrandDoc[]
+  adRefs          AdLibraryRef[]
+  staticAds       StaticAd[]
+  jobs            Job[]
+  projectFiles    LanderProjectFile[]
+  landers         Lander[]
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+}
+
+/// A BrandDoc is one piece of brand knowledge — PDF, DOCX, or TXT — with its
+/// extracted plain-text content cached for prompt injection. Category is a
+/// soft enum the user picks on upload; the runner uses it to order/label
+/// sections when it stitches the Brand Context block.
+model BrandDoc {
+  id          String   @id @default(cuid())
+  brandId     String
+  brand       Brand    @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  filename    String   // original upload filename
+  mimeType    String   // "application/pdf" | "application/vnd.openxmlformats-officedocument.wordprocessingml.document" | "text/plain"
+  category    String   // "brand" | "product" | "mechanism" | "avatars" | "voice" | "competitors"
+  sizeBytes   Int
+  storagePath String   // relative path under public/uploads/brand/<brandId>/<file>
+  extracted   String   // plain-text content extracted from the file
+  extractedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  @@index([brandId])
+}
+
+/// An AdLibraryRef is a reference ad image the user uploads to emulate —
+/// the INPUT to the static generator, not the output. Every ref is analyzed
+/// by Claude vision (layout, typography, angle, mood) so later generation
+/// jobs can compose a Nano Banana prompt grounded in the ref. Multi-select
+/// on the /library grid drives the Phase 3 generation flow.
+model AdLibraryRef {
+  id            String   @id @default(cuid())
+  brandId       String?
+  brand         Brand?   @relation(fields: [brandId], references: [id], onDelete: SetNull)
+
+  label         String?  // optional short human label
+  filename      String   // original upload filename
+  url           String   // public URL, e.g. /uploads/brand/<brandId>/ads/<file>
+  mimeType      String   // "image/jpeg" | "image/png" | "image/webp"
+  sizeBytes     Int
+
+  /// Claude vision description. Written by the background analyzer after
+  /// upload. `analyzedAt` is set on success OR failure; `analysisError`
+  /// is non-null only when the run failed.
+  analysis      String?
+  analysisError String?
+  analyzedAt    DateTime?
+
+  /// Comma-separated tags for v1. A join table is the right answer once
+  /// tag counts matter, but string-splitting gets us through Phase 2.
+  tags          String?
+
+  createdAt     DateTime @default(now())
+
+  promptHistories StaticGenPromptHistory[]
+  generatedStatics StaticAd[]
+
+  @@index([brandId])
+}
+
+/// A generation run. Static jobs fan out one Claude prompt + one Nano Banana
+/// image per selected reference. Lander jobs (Phase 5) will share this table
+/// via kind="lander". The JSON input snapshot lets us show history and (later)
+/// replay a job without losing the original user intent.
+model Job {
+  id         String   @id @default(cuid())
+  brandId    String?
+  brand      Brand?   @relation(fields: [brandId], references: [id], onDelete: SetNull)
+
+  kind       String   // "static" | "lander"
+  status     String   // "queued" | "running" | "done" | "failed"
+
+  /// JSON snapshot of the user's input (userPrompt, angleText, refIds[], etc.)
+  /// so the Jobs history page can render something useful and a replay can
+  /// reconstruct the original inputs.
+  input      String
+  /// JSON snapshot of the output (staticAdIds[], errors[]). Populated at end
+  /// of the run. Nullable while still running.
+  output     String?
+  error      String?
+
+  createdAt  DateTime  @default(now())
+  finishedAt DateTime?
+
+  staticAds       StaticAd[]
+  promptHistories StaticGenPromptHistory[]
+  landers         Lander[]
+
+  @@index([brandId])
+  @@index([kind])
+  @@index([createdAt])
+}
+
+/// One generated static ad image on disk, plus the prompt that produced it.
+/// Status drives the Review → Approved queue workflow. Every StaticAd traces
+/// back to the Job that created it, the AdLibraryRef it was inspired by,
+/// and (later) every Lander that used it as a visual anchor.
+model StaticAd {
+  id       String @id @default(cuid())
+  brandId  String
+  brand    Brand  @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  jobId    String
+  job      Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  /// Many-to-one: a reference can inspire multiple generations.
+  adLibraryRefId String?
+  adLibraryRef   AdLibraryRef? @relation(fields: [adLibraryRefId], references: [id], onDelete: SetNull)
+
+  /// The Nano Banana prompt Claude wrote. Kept for traceability + regen.
+  claudePrompt String
+  /// Public URL like /uploads/brand/<brandId>/statics/<uuid>.png
+  url          String
+  /// Gemini model used (e.g. gemini-2.5-flash-image).
+  model        String
+
+  /// Semantic role the image plays when used in a landing page. Drives
+  /// per-section image selection in the lander runner. Null = unassigned.
+  /// One of: "hero" | "product" | "lifestyle" | "proof" | "comparison"
+  role         String?
+
+  /// "draft" | "approved" | "archived"
+  /// (legacy rows may still have "live"/"paused"/"discarded"; the UI
+  /// treats them as approved/archived respectively.)
+  status       String  @default("draft")
+  /// Note the user left when asking for a regen ("too salesy", "wrong angle").
+  regenNote    String?
+  /// Populated when the Gemini call failed — the row still exists so the
+  /// review grid can show the error card inline with its siblings.
+  error        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  landersUsedIn LanderStaticLink[]
+
+  @@index([brandId])
+  @@index([jobId])
+  @@index([brandId, status])
+}
+
+// ============================================================
+// Lander Generator (Feature #6)
+// ============================================================
+
+/// A generated lander. One row per "project" — the user's goal is to produce
+/// a full landing page composed of N sections, each generated by its own
+/// agent and stitched together by the stitcher. Every Lander is anchored to
+/// a Job (for history/replay) and optionally to the approved statics that
+/// inspired it (LanderStaticLink).
+model Lander {
+  id       String @id @default(cuid())
+  brandId  String
+  brand    Brand  @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  jobId    String?
+  job      Job?   @relation(fields: [jobId], references: [id], onDelete: SetNull)
+
+  /// "advertorial" | "listicle" | "quiz"
+  landerType String
+  /// Which preset from the template was picked (e.g. "clinical", "warm-trustworthy").
+  presetId   String
+
+  /// Short stable path segment used for the public output dir and the URL.
+  slug       String @unique
+  /// User-facing title. Defaults to the brand name on creation.
+  title      String
+  /// Relative path under the project where the stitched HTML lives.
+  outputDir  String
+  /// JSON-encoded Record<string, string> — per-template intake answers.
+  intake     String?
+
+  /// "running" | "done" | "failed"
+  status     String  @default("running")
+  /// Last-error string when the overall job failed.
+  error      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sections      LanderSection[]
+  staticsUsed   LanderStaticLink[]
+
+  @@index([brandId])
+  @@index([jobId])
+}
+
+/// One section of a lander. Shape mirrors AgentRun from the old runner but
+/// adds `locked` (skip on regen), `userEdit` (hand-edit override), and
+/// `label`/`orderIndex` for stable ordering without relying on createdAt.
+model LanderSection {
+  id       String @id @default(cuid())
+  landerId String
+  lander   Lander @relation(fields: [landerId], references: [id], onDelete: Cascade)
+
+  sectionId  String // matches the template section id, e.g. "hero", "urgency-banner"
+  label      String
+  orderIndex Int
+
+  /// "pending" | "running" | "done" | "failed"
+  status  String  @default("pending")
+  /// User-set. When true, the runner skips this section on regenerate and
+  /// keeps the existing output through subsequent re-runs.
+  locked  Boolean @default(false)
+  model   String?
+  promptTokens  Int?
+  outputTokens  Int?
+  /// HTML produced by the agent. Null until done.
+  output  String?
+  error   String?
+
+  /// Inline hand-edit override. When non-null the stitcher uses this
+  /// instead of `output`. Lets users tweak a line without kicking off a
+  /// full regen.
+  userEdit String?
+
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+
+  @@index([landerId])
+  @@unique([landerId, sectionId])
+}
+
+/// Join table — which approved statics were used as visual anchors for a
+/// lander. Drives the traceability badge on both sides.
+model LanderStaticLink {
+  id         String @id @default(cuid())
+  landerId   String
+  lander     Lander @relation(fields: [landerId], references: [id], onDelete: Cascade)
+  staticAdId String
+  staticAd   StaticAd @relation(fields: [staticAdId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([landerId, staticAdId])
+  @@index([landerId])
+  @@index([staticAdId])
+}
+
+/// Bridge row — "which ref was used in which job, and what prompt did Claude
+/// write for it?" This is the "prompt history per image" feature on the ref
+/// detail page. One row per (ref, job, regen-iteration).
+model StaticGenPromptHistory {
+  id             String       @id @default(cuid())
+  adLibraryRefId String
+  adLibraryRef   AdLibraryRef @relation(fields: [adLibraryRefId], references: [id], onDelete: Cascade)
+  jobId          String
+  job            Job          @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  claudePrompt String
+  regenNote    String?
+
+  createdAt DateTime @default(now())
+
+  @@index([adLibraryRefId])
+  @@index([jobId])
+}
+
+/// Per-lander-type workspace file. Each brand has up to 3 slots per lander
+/// type (visualInspo / copyGuidelines / overallInstructions), and each slot
+/// can hold 1..N files — visual inspo in particular wants to be a small
+/// library of reference landers, not a single doc. The Lander runner
+/// (Phase 5) loads every file for the chosen type and injects it into the
+/// per-section prompts, alongside the Brand Knowledge Base.
+///
+/// For image uploads (PNG/JPG/WEBP in visualInspo), `url` is set and
+/// `content` is null. For text uploads (PDF/DOCX/TXT in any slot), `url`
+/// is null and `content` holds the extracted prose.
+model LanderProjectFile {
+  id       String @id @default(cuid())
+  brandId  String
+  brand    Brand  @relation(fields: [brandId], references: [id], onDelete: Cascade)
+
+  /// "advertorial" | "listicle" | "quiz"
+  landerType String
+  /// "visualInspo" | "copyGuidelines" | "overallInstructions"
+  slot       String
+
+  originalFilename String
+  storagePath      String   // public/uploads/brand/<brandId>/project-files/<type>/<slot>/<file>
+  mimeType         String
+  sizeBytes        Int
+
+  /// Public URL, set only for image uploads (visualInspo).
+  url     String?
+  /// Extracted plain text, set only for doc uploads.
+  content String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([brandId])
+  @@index([brandId, landerType])
+  @@index([brandId, landerType, slot])
+}

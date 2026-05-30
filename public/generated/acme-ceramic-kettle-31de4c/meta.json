@@ -1,0 +1,146 @@
+{
+  "productId": "cmnud6dzp0000rkuf59c8rl31",
+  "slug": "acme-ceramic-kettle-31de4c",
+  "title": "Acme Ceramic Kettle",
+  "playbook": "advertorial",
+  "preset": "lifestyle-magazine",
+  "runs": [
+    {
+      "section": "urgency-banner",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1064,
+      "outputTokens": 48,
+      "error": null
+    },
+    {
+      "section": "editorial-headline",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1116,
+      "outputTokens": 59,
+      "error": null
+    },
+    {
+      "section": "byline",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1066,
+      "outputTokens": 49,
+      "error": null
+    },
+    {
+      "section": "hero-image",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1079,
+      "outputTokens": 500,
+      "error": null
+    },
+    {
+      "section": "opening-hook",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1093,
+      "outputTokens": 407,
+      "error": null
+    },
+    {
+      "section": "star-rating-interrupter",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1046,
+      "outputTokens": 50,
+      "error": null
+    },
+    {
+      "section": "pain-escalation",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1093,
+      "outputTokens": 535,
+      "error": null
+    },
+    {
+      "section": "root-cause",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1140,
+      "outputTokens": 894,
+      "error": null
+    },
+    {
+      "section": "product-reveal",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1083,
+      "outputTokens": 1200,
+      "error": null
+    },
+    {
+      "section": "ingredient-cards",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1080,
+      "outputTokens": 1458,
+      "error": null
+    },
+    {
+      "section": "social-proof",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1103,
+      "outputTokens": 1600,
+      "error": null
+    },
+    {
+      "section": "results-timeline",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1047,
+      "outputTokens": 900,
+      "error": null
+    },
+    {
+      "section": "comparison-table",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1055,
+      "outputTokens": 800,
+      "error": null
+    },
+    {
+      "section": "pricing-tiers",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1133,
+      "outputTokens": 1400,
+      "error": null
+    },
+    {
+      "section": "guarantee",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1047,
+      "outputTokens": 500,
+      "error": null
+    },
+    {
+      "section": "final-cta",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1057,
+      "outputTokens": 500,
+      "error": null
+    },
+    {
+      "section": "footer",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1047,
+      "outputTokens": 231,
+      "error": null
+    }
+  ],
+  "rebuiltAt": "2026-04-11T15:23:36.103Z"
+}

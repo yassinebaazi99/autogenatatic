@@ -32,9 +32,19 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.local.example
 
 # vercel
 .vercel
+
+# landing-forge
+/prisma/dev.db
+/prisma/dev.db-journal
+# Note: dev.db (project root), public/uploads, and public/generated are
+# intentionally committed so brand data and generated statics sync across
+# machines. Remove them from the repo if you prefer a code-only checkout.
+/generated
+/.fixtures
 
 # typescript
 *.tsbuildinfo

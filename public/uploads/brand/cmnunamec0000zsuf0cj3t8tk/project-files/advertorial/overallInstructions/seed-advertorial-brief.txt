@@ -1,0 +1,23 @@
+# Advertorial brief
+
+OBJECTIVE: Convince a Brooklyn pour-over enthusiast that a $89 ceramic
+kettle is worth switching from their Fellow Stagg. The page is not
+trying to reach mainstream coffee drinkers — it assumes the reader
+already owns a decent kettle and is looking for the next thing.
+
+PRIORITY SECTIONS (in order of importance):
+1. Root cause reframe — the double-wall air gap mechanism is the star
+2. Opening hook — the scorched-water pain point
+3. Comparison table — Loom vs Hario vs Stagg vs stainless generic
+4. Guarantee + inventory — inventory scarcity is real, not fake
+
+DEPRIORITIZE:
+- Pricing tiers (we only sell one SKU at one price)
+- Generic "ingredients" cards (translate to feature cards about
+  material, spout, handle, base)
+
+MUST AVOID:
+- Comparing Loom to commercial coffee shop equipment — we're
+  competing against the $65–$130 home kettle market only
+- Anything that sounds like Kickstarter language
+- Any claim about speed — Loom is slow on purpose

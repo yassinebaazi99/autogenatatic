@@ -1,0 +1,24 @@
+# Advertorial copy rules for Loom
+
+STRUCTURE
+- Open with a relatable pain point (kettle scorches water, too fast
+  pour, wrong temperature). Second person. No product mention for the
+  first 2 paragraphs.
+- Reveal the mechanism BEFORE the product. The reader should
+  understand why ceramic wins before they see the brand name.
+- Product reveal as the answer — specific, measured, almost understated.
+- Proof section uses the SCA Portland test numbers (201°F vs 194°F vs
+  188°F at 90 seconds).
+- Pricing tier — single tier preferred. Loom doesn't discount-bundle.
+
+BANNED PHRASES (on top of the universal list)
+- "game-changer", "revolutionary", "changed the way I brew"
+- Generic testimonials ("I love it!")
+- Any claim about health or energy (we sell kettles, not supplements)
+
+REQUIRED MENTIONS
+- 60-day guarantee
+- Made in Portland, OR
+- 1,000-unit batch size and current inventory ("312 left")
+- Free bamboo coaster + dust cover bonus
+- $89 price (or $129 strike-through when relevant)

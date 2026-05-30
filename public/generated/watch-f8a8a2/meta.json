@@ -1,0 +1,146 @@
+{
+  "productId": "cmnuic2if000nicufoj05tdwx",
+  "slug": "watch-f8a8a2",
+  "title": "watch",
+  "playbook": "advertorial",
+  "preset": "news-expose",
+  "runs": [
+    {
+      "section": "urgency-banner",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1071,
+      "outputTokens": 49,
+      "error": null
+    },
+    {
+      "section": "editorial-headline",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1123,
+      "outputTokens": 52,
+      "error": null
+    },
+    {
+      "section": "byline",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1073,
+      "outputTokens": 43,
+      "error": null
+    },
+    {
+      "section": "hero-image",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1086,
+      "outputTokens": 149,
+      "error": null
+    },
+    {
+      "section": "opening-hook",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1100,
+      "outputTokens": 444,
+      "error": null
+    },
+    {
+      "section": "star-rating-interrupter",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1053,
+      "outputTokens": 50,
+      "error": null
+    },
+    {
+      "section": "pain-escalation",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1100,
+      "outputTokens": 528,
+      "error": null
+    },
+    {
+      "section": "root-cause",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1147,
+      "outputTokens": 645,
+      "error": null
+    },
+    {
+      "section": "product-reveal",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1090,
+      "outputTokens": 843,
+      "error": null
+    },
+    {
+      "section": "ingredient-cards",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1087,
+      "outputTokens": 1252,
+      "error": null
+    },
+    {
+      "section": "social-proof",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1110,
+      "outputTokens": 1600,
+      "error": null
+    },
+    {
+      "section": "results-timeline",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1054,
+      "outputTokens": 92,
+      "error": null
+    },
+    {
+      "section": "comparison-table",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1062,
+      "outputTokens": 800,
+      "error": null
+    },
+    {
+      "section": "pricing-tiers",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1140,
+      "outputTokens": 1400,
+      "error": null
+    },
+    {
+      "section": "guarantee",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1054,
+      "outputTokens": 228,
+      "error": null
+    },
+    {
+      "section": "final-cta",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1064,
+      "outputTokens": 96,
+      "error": null
+    },
+    {
+      "section": "footer",
+      "status": "done",
+      "model": "claude-opus-4-6",
+      "promptTokens": 1054,
+      "outputTokens": 137,
+      "error": null
+    }
+  ],
+  "rebuiltAt": "2026-04-11T15:47:52.955Z"
+}

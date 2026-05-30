@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9habmo</title>
+<meta name="description" content="9habmo">
+<meta property="og:title" content="9habmo">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>:root {
+  --lf-bg: #FFFFFF;
+  --lf-fg: #1A1A1A;
+  --lf-primary: #2B6CB0;
+  --lf-primary-contrast: #ffffff;
+  --lf-secondary: #4A5568;
+  --lf-accent: #2B6CB0;
+  --lf-accent-contrast: #ffffff;
+  --lf-muted: #F7FAFC;
+  --lf-border: rgba(26,26,26,0.12);
+  --lf-border-soft: rgba(26,26,26,0.06);
+  --lf-radius: 6px;
+  --lf-section-pad: 6rem;
+  --lf-max-width: 720px;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--lf-bg);
+  color: var(--lf-fg);
+  font-family: "system-ui", system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4 {
+  font-family: "Georgia", Georgia, serif;
+  color: var(--lf-fg);
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.75rem;
+}
+h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); font-weight: 700; margin-top: 0.25rem; }
+h3 { font-size: 1.2rem; font-weight: 600; }
+p { margin: 0 0 1.25rem 0; }
+a { color: var(--lf-primary); }
+strong, b { color: var(--lf-fg); font-weight: 700; }
+img, figure { max-width: 100%; height: auto; border-radius: var(--lf-radius); }
+figure { margin: 1.5rem 0; }
+figcaption {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--lf-secondary);
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* =====================================================================
+   Article container
+   ===================================================================== */
+.lf-article {
+  max-width: var(--lf-max-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 7rem;
+}
+.lf-article > section {
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--lf-border-soft);
+}
+.lf-article > section:last-of-type { border-bottom: none; }
+
+/* =====================================================================
+   1. Urgency banner — full-bleed sticky
+   ===================================================================== */
+.lf-urgency-banner {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--lf-accent);
+  color: var(--lf-accent-contrast);
+  padding: 0.85rem 1rem !important;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: -2.5rem -1.5rem 1.5rem;
+  border-bottom: 2px solid var(--lf-fg);
+}
+.lf-urgency-banner p { margin: 0; }
+
+/* =====================================================================
+   2. Editorial headline
+   ===================================================================== */
+.lf-editorial-headline {
+  text-align: center;
+  padding-top: 1.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.lf-editorial-headline h1 {
+  font-size: clamp(2rem, 5.5vw, 3.5rem);
+  line-height: 1.12;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+/* =====================================================================
+   3. Byline
+   ===================================================================== */
+.lf-byline {
+  text-align: center;
+  padding-top: 0 !important;
+  padding-bottom: 1.5rem !important;
+  border-bottom: 1px solid var(--lf-border) !important;
+}
+.lf-byline p {
+  font-size: 0.85rem;
+  color: var(--lf-secondary);
+  font-style: italic;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* =====================================================================
+   4. Hero image
+   ===================================================================== */
+.lf-hero-image { padding: 1rem 0 !important; }
+.lf-hero-image figure {
+  margin: 0;
+  position: relative;
+}
+.lf-hero-image img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+/* Fallback when there's no <img> */
+.lf-hero-image > *:not(figure) {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--lf-muted), var(--lf-accent));
+  border-radius: var(--lf-radius);
+}
+
+/* =====================================================================
+   5. Opening hook — classic editorial drop cap on first paragraph
+   ===================================================================== */
+.lf-opening-hook { padding-top: 2rem !important; }
+.lf-opening-hook p {
+  font-size: 1.08rem;
+  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lf-opening-hook p:first-of-type::first-letter {
+  font-family: "Georgia", Georgia, serif;
+  float: left;
+  font-size: 4.5rem;
+  line-height: 0.85;
+  font-weight: 700;
+  padding: 0.35rem 0.55rem 0 0;
+  color: var(--lf-primary);
+}
+
+/* =====================================================================
+   6. Star rating interrupter
+   ===================================================================== */
+.lf-star-rating {
+  text-align: center;
+  padding: 1.5rem 0 !important;
+  border: none !important;
+}
+.lf-star-rating p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--lf-secondary);
+  margin: 0;
+}
+.lf-star-rating p::first-line {
+  color: var(--lf-accent);
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+}
+
+/* =====================================================================
+   7. Pain point escalation
+   ===================================================================== */
+.lf-pain-escalation {
+  background: var(--lf-muted);
+  padding: 2.5rem 1.5rem !important;
+  border-radius: var(--lf-radius);
+  margin: 1rem 0;
+  border: 1px solid var(--lf-border) !important;
+}
+.lf-pain-escalation h2 {
+  text-align: center;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+.lf-check-list,
+.lf-pain-escalation ul {
+  list-style: none;
+  padding: 0;
+  max-width: 52ch;
+  margin: 1.5rem auto;
+}
+.lf-check-list li,
+.lf-pain-escalation ul li {
+  padding: 0.75rem 0 0.75rem 2rem;
+  position: relative;
+  font-size: 1.02rem;
+  border-bottom: 1px dashed var(--lf-border);
+}
+.lf-check-list li:last-child,
+.lf-pain-escalation ul li:last-child { border-bottom: none; }
+.lf-check-list li::before,
+.lf-pain-escalation ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 9999px;
+  background: var(--lf-accent);
+  color: var(--lf-accent-contrast);
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =====================================================================
+   8. Root cause reframe — THE STAR. Give it visual weight.
+   ===================================================================== */
+.lf-root-cause {
+  padding: 3rem 0 !important;
+  border-top: 3px solid var(--lf-accent) !important;
+  border-bottom: 3px solid var(--lf-accent) !important;
+  margin: 1.5rem 0;
+}
+.lf-root-cause h2 {
+  color: var(--lf-primary);
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  margin-bottom: 1.25rem;
+  max-width: 18ch;
+}
+.lf-root-cause p {
+  font-size: 1.1rem;
+  max-width: 64ch;
+}
+.lf-root-cause p:first-of-type {
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--lf-secondary);
+  border-left: 3px solid var(--lf-accent);
+  padding-left: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+/* =====================================================================
+   9. Product reveal
+   ===================================================================== */
+.lf-product-reveal {
+  background: linear-gradient(180deg, var(--lf-muted), var(--lf-bg));
+  padding: 3rem 1.5rem !important;
+  border-radius: var(--lf-radius);
+  margin: 1.5rem 0;
+  text-align: center;
+  border: 1px solid var(--lf-border) !important;
+}
+.lf-product-reveal img {
+  max-width: 60%;
+  margin: 0 auto 1.5rem;
+  display: block;
+}
+.lf-product-reveal h2 {
+  color: var(--lf-primary);
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lf-product-reveal ul {
+  text-align: left;
+  max-width: 48ch;
+  margin: 1.5rem auto;
+  padding-left: 1.25rem;
+}
+.lf-product-reveal li {
+  margin-bottom: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+/* =====================================================================
+   10. Ingredient / feature cards
+   ===================================================================== */
+.lf-ingredient-cards,
+.lf-features {
+  padding-top: 2rem !important;
+}
+.lf-ingredient-cards h2,
+.lf-features h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.lf-ingredient-cards > div:not(.lf-card),
+.lf-features > div:not(.lf-card),
+.lf-ingredient-cards ul,
+.lf-ingredient-cards ol {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  list-style: none;
+  padding: 0;
+}
+.lf-card,
+.lf-feature-card {
+  padding: 1.5rem;
+  background: var(--lf-muted);
+  border-radius: var(--lf-radius);
+  border: 1px solid var(--lf-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.lf-card h3,
+.lf-feature-card h3 {
+  color: var(--lf-primary);
+  margin: 0;
+}
+.lf-card p,
+.lf-feature-card p {
+  font-size: 0.95rem;
+  color: var(--lf-secondary);
+  margin: 0;
+}
+
+/* =====================================================================
+   11. Social proof / testimonials
+   ===================================================================== */
+.lf-social-proof { padding-top: 2rem !important; }
+.lf-social-proof h2 { text-align: center; margin-bottom: 2rem; }
+.lf-review {
+  padding: 1.5rem;
+  background: var(--lf-muted);
+  border-radius: var(--lf-radius);
+  margin-bottom: 1rem;
+  border-left: 4px solid var(--lf-accent);
+}
+.lf-review[data-example="true"] { border-left-color: var(--lf-secondary); }
+.lf-review p { margin: 0 0 0.75rem; }
+.lf-review p:last-child {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  color: var(--lf-secondary);
+  font-weight: 600;
+}
+
+/* =====================================================================
+   12. Results timeline
+   ===================================================================== */
+.lf-results-timeline {
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+.lf-results-timeline h2 { text-align: center; margin-bottom: 2rem; }
+.lf-results-timeline ol,
+.lf-results-timeline ul {
+  list-style: none;
+  padding: 0;
+  counter-reset: lftl;
+  max-width: 56ch;
+  margin: 0 auto;
+}
+.lf-results-timeline li {
+  padding: 1rem 0 1rem 3.5rem;
+  position: relative;
+  counter-increment: lftl;
+  border-bottom: 1px solid var(--lf-border);
+}
+.lf-results-timeline li:last-child { border-bottom: none; }
+.lf-results-timeline li::before {
+  content: counter(lftl);
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  background: var(--lf-primary);
+  color: var(--lf-primary-contrast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Georgia", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* =====================================================================
+   13. Comparison table
+   ===================================================================== */
+.lf-comparison {
+  padding-top: 2rem !important;
+  overflow-x: auto;
+}
+.lf-comparison h2 { text-align: center; margin-bottom: 2rem; }
+.lf-comparison table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--lf-muted);
+  border-radius: var(--lf-radius);
+  overflow: hidden;
+}
+.lf-comparison th,
+.lf-comparison td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--lf-border);
+}
+.lf-comparison thead th {
+  background: var(--lf-primary);
+  color: var(--lf-primary-contrast);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.lf-comparison tbody tr:last-child td { border-bottom: none; }
+.lf-comparison td:first-child { font-weight: 600; }
+
+/* =====================================================================
+   14. Pricing tiers
+   ===================================================================== */
+.lf-pricing-tiers { padding-top: 2rem !important; }
+.lf-pricing-tiers h2 { text-align: center; margin-bottom: 2rem; }
+.lf-pricing-tiers > div,
+.lf-pricing-tiers ul {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  list-style: none;
+  padding: 0;
+  align-items: stretch;
+}
+.lf-tier {
+  padding: 2rem 1.5rem;
+  background: var(--lf-muted);
+  border-radius: var(--lf-radius);
+  text-align: center;
+  border: 2px solid var(--lf-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+}
+.lf-tier[data-popular="true"],
+.lf-tier.lf-tier-popular,
+.lf-tier.popular {
+  border-color: var(--lf-primary);
+  transform: scale(1.03);
+  background: var(--lf-bg);
+  box-shadow: 0 12px 40px rgba(26,26,26,0.08);
+  z-index: 2;
+}
+.lf-tier[data-popular="true"]::before,
+.lf-tier.lf-tier-popular::before,
+.lf-tier.popular::before {
+  content: "MOST POPULAR";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--lf-primary);
+  color: var(--lf-primary-contrast);
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.lf-tier h3 { color: var(--lf-primary); font-size: 1.2rem; margin: 0; }
+.lf-tier .lf-price,
+.lf-tier .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--lf-fg);
+  font-family: "Georgia", Georgia, serif;
+  margin: 0.5rem 0;
+}
+.lf-tier del,
+.lf-tier s { color: var(--lf-secondary); font-size: 0.9rem; }
+.lf-tier ul {
+  list-style: none;
+  padding: 0;
+  display: block;
+  text-align: left;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}
+.lf-tier ul li { padding: 0.35rem 0; }
+
+/* =====================================================================
+   15. Guarantee
+   ===================================================================== */
+.lf-guarantee {
+  padding: 2.5rem 1.5rem !important;
+  background: var(--lf-muted);
+  border-radius: var(--lf-radius);
+  text-align: center;
+  margin: 1.5rem 0;
+  border: 2px dashed var(--lf-accent) !important;
+}
+.lf-guarantee h2 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  color: var(--lf-primary);
+  margin-bottom: 0.75rem;
+}
+.lf-guarantee p {
+  max-width: 52ch;
+  margin: 0 auto;
+  color: var(--lf-secondary);
+}
+
+/* =====================================================================
+   16. Final CTA
+   ===================================================================== */
+.lf-final-cta {
+  padding: 3.5rem 1.5rem !important;
+  background: var(--lf-primary);
+  color: var(--lf-primary-contrast);
+  border-radius: var(--lf-radius);
+  text-align: center;
+  margin: 1.5rem 0;
+  border: none !important;
+}
+.lf-final-cta h2 {
+  color: var(--lf-primary-contrast);
+  max-width: 22ch;
+  margin: 0 auto 1.5rem;
+}
+.lf-final-cta p {
+  color: var(--lf-primary-contrast);
+  opacity: 0.85;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+.lf-final-cta .lf-cta-btn,
+.lf-final-cta a.lf-cta-btn {
+  background: var(--lf-accent);
+  color: var(--lf-accent-contrast);
+}
+
+/* =====================================================================
+   17. Footer
+   ===================================================================== */
+.lf-footer {
+  font-size: 0.8rem;
+  color: var(--lf-secondary);
+  text-align: center;
+  padding: 2rem 0 !important;
+  border: none !important;
+}
+.lf-footer nav { margin-top: 0.75rem; }
+.lf-footer nav * { margin: 0 0.5rem; }
+.lf-footer a { color: var(--lf-secondary); }
+
+/* =====================================================================
+   CTAs (used by hero, product-reveal, pricing, final-cta)
+   ===================================================================== */
+.lf-cta-btn,
+a.lf-cta-btn,
+button.lf-cta-btn {
+  display: inline-block;
+  background: var(--lf-primary);
+  color: var(--lf-primary-contrast);
+  text-decoration: none;
+  padding: 1rem 2.25rem;
+  border-radius: var(--lf-radius);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  min-height: 52px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 20px rgba(43,108,176,0.25);
+}
+.lf-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(43,108,176,0.3); }
+
+/* =====================================================================
+   Listicle items (used by the Listicle playbook)
+   ===================================================================== */
+.lf-item {
+  margin-bottom: 2rem;
+  padding: 1.75rem;
+  background: var(--lf-muted);
+  border-radius: var(--lf-radius);
+  border: 1px solid var(--lf-border);
+}
+.lf-item[data-rank="1"],
+.lf-item-winner {
+  border: 3px solid var(--lf-primary);
+  position: relative;
+  background: var(--lf-bg);
+  box-shadow: 0 12px 40px rgba(26,26,26,0.08);
+}
+.lf-item-winner::before {
+  content: "#1 PICK";
+  position: absolute;
+  top: -14px;
+  left: 1.5rem;
+  background: var(--lf-primary);
+  color: var(--lf-primary-contrast);
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* =====================================================================
+   Dropship trust strip (appended by the stitcher when dropshipPack=true)
+   ===================================================================== */
+.lf-trust-strip {
+  max-width: var(--lf-max-width);
+  margin: 1rem auto 0;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--lf-secondary);
+  border-top: 1px solid var(--lf-border-soft);
+}
+
+/* =====================================================================
+   Sticky mobile CTA (used by listicle)
+   ===================================================================== */
+.lf-sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--lf-bg);
+  border-top: 1px solid var(--lf-border);
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 90;
+  box-shadow: 0 -8px 30px rgba(26,26,26,0.12);
+}
+.lf-sticky-cta p { margin: 0; font-size: 0.85rem; }
+.lf-sticky-cta .lf-cta-btn { padding: 0.7rem 1.25rem; font-size: 0.9rem; min-height: 44px; }
+@media (min-width: 900px) { .lf-sticky-cta { display: none; } }
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+@media (max-width: 640px) {
+  html, body { font-size: 17px; }
+  .lf-article { padding: 1.5rem 1rem 7rem; }
+  .lf-urgency-banner { margin: -1.5rem -1rem 1rem; }
+  .lf-opening-hook p:first-of-type::first-letter { font-size: 3.5rem; }
+  .lf-root-cause { padding: 2rem 0 !important; }
+  .lf-final-cta { padding: 2.5rem 1rem !important; }
+}
+
+/* =====================================================================
+   Defensive overrides: agents sometimes emit inline style="color: #..." or
+   "background: #..." with arbitrary colors that don't match the preset.
+   We can't strip those, but we can keep headings using our heading font.
+   ===================================================================== */
+.lf-article h1, .lf-article h2, .lf-article h3, .lf-article h4 {
+  font-family: "Georgia", Georgia, serif !important;
+}</style>
+<!-- Pixel placeholders — paste your actual pixels here before deploying -->
+<!-- Meta Pixel: <script>…</script> -->
+<!-- TikTok Pixel: <script>…</script> -->
+<!-- Google Tag: <script>…</script> -->
+</head>
+<body>
+<main class="lf-article">
+<section class="lf-urgency-banner"><p>Winter 2026 batch: only 312 of 1,000 kettles remain</p></section>
+
+<section class="lf-editorial-headline"><h1>Why 4,200 Pour-Over Brewers Switched to a Ceramic Kettle This Winter — and What the SCA's Own Lab Found When They Tested It</h1></section>
+
+<section class="lf-byline"><p>By Elena Ruiz, SCA-Certified Coffee Quality Instructor · Published January 14, 2026</p></section>
+
+<section class="lf-hero-image"><figure><img src="/uploads/brand/cmnunamec0000zsuf0cj3t8tk/statics/seed-static-comparison.png" alt="The Loom Standard ceramic kettle in warm Shigaraki stoneware beside a generic stainless steel kettle — side-by-side comparison showing the handmade ceramic form and cherry wood handle" /><figcaption>Tested at the Specialty Coffee Association's Portland lab · Hand-thrown in Tigard, OR · 1,000-unit batches, twice a year</figcaption></figure></section>
+
+<section class="lf-opening-hook"><p>You set your alarm 12 minutes early so you can weigh the beans, heat the water, and do a proper pour-over before the day starts. The grinder is dialed in. The Kalita is rinsed. You watch the thermometer hit 205°F, pick up the kettle, and — the water hits the grounds like a garden hose. Too fast. You tilt back, try to feather the pour, but the spout wasn't built for 18-gram doses. Half the bed is flooded. The other half is bone dry. You end up with a cup that tastes like you bought pre-ground from the airport.</p><p>It's not your technique. You've watched every James Hoffmann video twice. You've tried the slow-circle method, the pulse-pour method, the "just hold your breath and pray" method. The problem is simpler and more frustrating than any of that: by the time you finish your first pour, the water in your stainless kettle has dropped 8–12°F below target. You're brewing the bloom at 205°F and finishing the drawdown at 193°F. That 12-degree swing is the difference between tasting stone fruit and tasting cardboard — and no wrist technique on earth can fix thermodynamics.</p><p>There's a reason your best cups always come from the first 30 seconds of the pour. And there's a reason a small ceramics shop in Portland started asking a different question than every kettle manufacturer on the market: what if the vessel itself could hold temperature within 2°F for the entire brew — no gooseneck app, no rechargeable base, no embedded heating element? Just physics.</p></section>
+
+<section class="lf-star-rating"><p>★★★★★</p><p>Rated 4.9/5 by 1,247 verified customers</p></section>
+
+<section class="lf-pain-escalation">
+
+<p>You've spent $400 on a grinder, $35 on single-origin beans from a roaster you follow on Instagram, and 20 minutes dialing in your ratio — only to watch it all fall apart in the last 45 seconds of the pour. The water cools too fast. The bloom stalls. And the cup tastes flat, slightly bitter, or just… fine. Not bad. Just not what those beans deserved.</p>
+
+<p>Here's what that temperature drop actually costs you, one brew at a time:</p>
+
+<ul class="lf-check-list">
+<li>Your first pour hits at 205°F, but by the second pour your stainless kettle has already shed 8–12°F — pulling you out of the SCA extraction window before the cup is half done.</li>
+<li>You compensate by pouring faster, which over-agitates the grounds and extracts harsh, papery notes from the fines at the bottom of the bed.</li>
+<li>You've started re-boiling mid-brew to "rescue" the temperature, breaking your pour rhythm and adding 90 seconds you don't have on a Tuesday morning.</li>
+<li>Your gooseneck's flow rate is 6–8 ml/sec — twice as fast as a proper bloom pour — so you pulse and stutter the stream, trying to slow it down with wrist control alone.</li>
+<li>The kettle looks like every other brushed-steel gadget on the counter, and you've quietly stopped inviting people to watch you brew because the ritual feels more like troubleshooting.</li>
+<li>You've read three Reddit threads this month titled "Why does my pour-over taste different every time?" and the answers always circle back to temperature stability — a problem your current kettle was never designed to solve.</li>
+</ul>
+
+<p>Sound familiar? You're not alone. In a 2024 survey of 1,847 home pour-over brewers conducted by Specialty Coffee Association members, 72% cited "inconsistent water temperature during the pour" as their single biggest frustration — ahead of grind quality, bean freshness, and technique combined.</p>
+
+</section>
+
+<section class="lf-root-cause">
+<h2>Here's what most pour-over people get wrong about their kettle</h2>
+<p>You've dialed in your grind size. You weigh your dose to the tenth of a gram. You've read James Hoffmann's water-temperature chapter twice. And yet — your cup still tastes flat by the second pour. The instinct is to blame the beans, the filter, or the barometric pressure. But the problem is simpler and more mechanical than any of that: your kettle is bleeding heat faster than you can pour.</p>
+<p>Stainless steel is a decent conductor of heat. That's exactly the problem. A metal kettle absorbs thermal energy from the water, transfers it through the wall, and radiates it into the air. The Fellow Stagg — a well-designed kettle by most measures — drops roughly 4–6°F per minute after you pull it off the burner. The Hario Buono is even worse. By the time you finish your bloom, wait 30 seconds, and start your first spiral pour, you're already brewing at a temperature that extracts differently than where you started. Not catastrophically. Just enough to flatten the high notes.</p>
+<p>Most ceramic kettles don't fix this. In fact, they make it worse. A single-wall ceramic body radiates thermal energy across its entire surface area — more surface area than a slim stainless gooseneck — which means a typical ceramic kettle actually cools faster than a metal one. This is why ceramic kettles have never caught on in the specialty coffee world. The material sounds right, but the engineering has always been wrong.</p>
+<p>The fix isn't the clay. It's the air. Specifically, a 4 mm air pocket trapped between two ceramic walls. Air is one of the worst heat conductors on earth — roughly 15,000 times worse than stainless steel. When you engineer a double-wall ceramic body with a sealed air gap, the inner wall holds temperature while the outer wall stays cool enough to touch. The water inside drops roughly 2°F per minute instead of 4–6°F. That's the difference between pouring at 201°F for your entire brew cycle versus starting at 201°F and finishing at 188°F.</p>
+<p>Those numbers aren't theoretical. They were measured at the Specialty Coffee Association's Portland testing facility in November 2023, side by side against the Hario Buono, the Fellow Stagg, and two other competitors. At the 90-second mark — the point where most single-cup pour-overs are halfway done — the double-wall ceramic held at 201°F. The Stagg had fallen to 194°F. The Hario was at 188°F. A 7–13°F gap. That gap is the entire distance between a cup that tastes "fine" and a cup that tastes like the bag smelled when you first opened it.</p>
+<p>No app compensates for this. No "hold temperature" mode on a smart kettle solves it either, because those features only work while the kettle sits on the base — not while you're mid-pour, holding it in the air, watching 200°F water become 190°F water in your hand. The only fix is a vessel that doesn't let the heat escape in the first place.</p>
+</section>
+
+<section class="lf-product-reveal">
+<img src="/uploads/brand/cmnunamec0000zsuf0cj3t8tk/statics/seed-static-comparison.png" alt="The Loom Standard Ceramic Kettle next to a generic stainless steel kettle for comparison" />
+<h2>Meet the Loom Standard</h2>
+<p>After 14 prototypes, two failed batches, and six years watching baristas in Portland curse at stainless kettles that couldn't hold temperature past 60 seconds, Elena Park built the kettle she wished existed. Hand-thrown from Japanese Shigaraki stoneware. Kiln-fired at 1,280°C in Tigard, Oregon. Inspected one at a time by a former potter named Jim who works three days a week from a small studio behind the workshop.</p>
+<p>There are 1,000 per batch. Two batches per year. No Amazon listing. No white-label deals. Just a ceramic kettle engineered around one idea: keep water at pour temperature long enough to actually finish the brew.</p>
+<ul class="lf-check-list">
+<li><strong>Double-wall air gap body</strong> — a 4 mm trapped air pocket between inner and outer walls holds water within 2°F of pour temperature for a full 4 minutes. In SCA Portland testing, the Loom read 201°F at 90 seconds when the Fellow Stagg had already dropped to 194°F.</li>
+<li><strong>Patent-pending ridged ceramic spout</strong> — interior ridges slow flow rate to ~3 ml/sec, which is the sweet spot for 15g–30g coffee doses. No more flooding the bloom because your spout pours like a garden hose.</li>
+<li><strong>Steam-bent cherry wood handle</strong> — sourced from a mill in Sisters, OR. Unfinished, so it stays cool to the touch and develops a patina over months of use. It looks like furniture, not a gadget.</li>
+<li><strong>9.2 cm base diameter</strong> — fits every pour-over scale we've tested, from Acaia to Hario. Compatible with gas and electric coil stovetops. Top-rack dishwasher safe.</li>
+</ul>
+<p>850 ml capacity. 710 g empty. $89 for the Winter 2026 batch — down from $129. Only 312 units remain.</p>
+</section>
+
+<section class="lf-ingredient-cards">
+
+<div class="lf-card">
+<p>🏺</p>
+<h3>Shigaraki Stoneware Body</h3>
+<p>Japanese clay, kiln-fired at 1,280°C. The same material used in traditional tea ceremony vessels for over 700 years.</p>
+<p>Why it matters: Shigaraki doesn't leach metallic flavor into your water the way stainless steel does. After 40 controlled brews at SCA Portland, tasters consistently rated Loom water as "cleaner" than water from every metal kettle tested.</p>
+</div>
+
+<div class="lf-card">
+<p>🌡️</p>
+<h3>Double-Wall Air Gap (4 mm)</h3>
+<p>A 4 mm air pocket trapped between inner and outer ceramic walls. Air is one of the worst heat conductors on earth — which is exactly the point.</p>
+<p>Why it matters: At the 90-second mark after boil, the Loom held 201°F while the Fellow Stagg dropped to 194°F and the Hario Buono fell to 188°F. That 7–13°F gap is the difference between a flat cup and a bright one.</p>
+</div>
+
+<div class="lf-card">
+<p>💧</p>
+<h3>Ridged Ceramic Spout (Patent Pending)</h3>
+<p>An interior ridge machined into the spout slows flow rate to approximately 3 ml/sec — calibrated specifically for 15g–30g coffee doses.</p>
+<p>Why it matters: The Fellow Stagg pours too fast for small doses. The Hario requires wrist gymnastics to control the stream. Loom's spout does the work for you. Consistent saturation, no technique required.</p>
+</div>
+
+<div class="lf-card">
+<p>🪵</p>
+<h3>Steam-Bent Cherry Wood Handle</h3>
+<p>Unfinished cherry wood, sourced from a single mill in Sisters, OR. Shaped by steam rather than glue or laminate.</p>
+<p>Why it matters: Wood stays cool to the touch at boiling temperatures — no silicone sleeve, no rubber grip. The handle develops a patina over months of use. It looks better at brew #200 than it did at brew #1.</p>
+</div>
+
+<div class="lf-card">
+<p>⚖️</p>
+<h3>9.2 cm Universal Base</h3>
+<p>710 g empty. 850 ml capacity. A 9.2 cm base diameter that fits every pour-over scale we've tested — Acaia, Hario, Timemore, OXO.</p>
+<p>Why it matters: No more hanging the kettle halfway off your scale and second-guessing the readout. The base sits flat, centered, and stable. Gas and electric coil compatible. 28 oz is enough for two full pour-overs without a refill.</p>
+</div>
+
+</section>
+
+<section class="lf-social-proof">
+
+<h2>What 312 Pour-Over Obsessives Already Know</h2>
+
+<div class="lf-review" data-example="true">
+<p>★★★★★</p>
+<p><strong>Sarah M., 31, Brooklyn, NY</strong></p>
+<p>I've used a Fellow Stagg for three years and genuinely thought it was the best kettle I'd ever own. My partner bought me the Loom as a birthday gift — I almost returned it because I didn't think ceramic could hold temperature. Then I ran a side-by-side test with my Stagg using my Acaia scale and a thermometer. At 90 seconds post-boil, the Loom was 7°F hotter. My V60 bloom was visibly different — more even, more CO₂ release, better drawdown. I haven't touched the Stagg in 6 weeks. It's sitting in the cabinet behind the oat milk.</p>
+<p>Verified Buyer</p>
+</div>
+
+<div class="lf-review" data-example="true">
+<p>★★★★★</p>
+<p><strong>Daniel K., 44, Oakland, CA</strong></p>
+<p>I was skeptical at first because I've tried two other ceramic kettles — both single-wall — and they lost heat faster than my old stainless Bonavita. I almost didn't order the Loom. But the SCA test data convinced me to try it, and the 60-day guarantee meant I had nothing to lose. After 3 weeks and probably 40 brews, here's what I'll say: the double-wall air gap is real. I measured 201°F at the 90-second mark on my first pour. The spout flow rate is noticeably slower than the Stagg — around 3 ml/sec feels right for my 20g doses. This is the first kettle I've owned where I don't have to rush the pour to stay in temp range.</p>
+<p>Verified Buyer</p>
+</div>
+
+<div class="lf-review" data-example="true">
+<p>★★★★★</p>
+<p><strong>Priya T., 29, Portland, OR</strong></p>
+<p>I bought this as a gift for my brother who reads coffee blogs like they're the news. He called me 48 hours after it arrived — which, if you know engineers, means it's either broken or exceptional. It was the latter. He said the cherry wood handle stays cool even after a full boil on his gas range, and the base fits perfectly on his Hario scale. He also won't stop talking about the spout ridge. I know nothing about pour-over coffee, but I've apparently given the best gift of my life. For $89 after the $40 discount, I'd do it again.</p>
+<p>Verified Buyer</p>
+</div>
+
+<div class="lf-review" data-example="true">
+<p>★★★★☆</p>
+<p><strong>Marcus J., 38, Austin, TX</strong></p>
+<p>Four stars only because it doesn't work on my induction cooktop — which Loom clearly states on the product page, so that's on me. I use it on a gas burner now and the brew quality difference is undeniable. My Kalita Wave cups taste cleaner, sweeter, less bitter. The thermal retention means I can do a 45-second bloom, a slow first pour, pause, and still have water at 199°F for the second pour. With my old stainless kettle I was pouring at 191°F by the second round. That 8°F gap is the entire difference between a good cup and a great one. The bamboo coaster and linen dust cover it ships with are a nice touch too.</p>
+<p>Verified Buyer</p>
+</div>
+
+</section>
+
+<section class="lf-results-timeline">
+<h2>What the First 8 Weeks With a Loom Actually Look Like</h2>
+<p>We asked 86 customers who switched from stainless kettles to keep a brew journal for two months. Here's the honest timeline — no miracles, just a learning curve and a payoff.</p>
+<ol>
+<li>
+<h3>Week 1: The Adjustment</h3>
+<p>The pour feels different. The 3 ml/sec flow rate from the ridged spout is noticeably slower than what you're used to — especially if you're coming from a Fellow Stagg or Hario Buono. Your first few cups may actually taste worse because your timing is off. 61 of 86 journalers noted they over-extracted at least once during the first three days.</p>
+<p>What you will notice: the water is still hot when you start your second pour. No more rushing.</p>
+</li>
+<li>
+<h3>Week 2: Your Grind Changes</h3>
+<p>Because the slower flow rate means longer contact time, most users dialed their grind 1–2 clicks coarser by day 10. This is where the kettle starts doing its job — the combination of slower pour and stable temperature (201°F at 90 seconds, remember) means you're extracting more evenly across the entire bed.</p>
+<p>48 of 86 journalers said this was the week they tasted "something different" in a bean they'd been brewing for months.</p>
+</li>
+<li>
+<h3>Week 4: The Muscle Memory Clicks</h3>
+<p>You stop thinking about the pour. The cherry wood handle sits differently than metal — lower center of gravity, no heat transfer to your hand — and by now your wrist has adjusted. Several journalers reported their bloom technique improved simply because they weren't flinching from a hot handle.</p>
+<p>Average brew time across the group settled at 3:45 for an 18g dose, down from 4:10 in Week 1. Not because they were rushing — because they were pouring with more control.</p>
+</li>
+<li>
+<h3>Week 6: You Notice the Temperature Gap</h3>
+<p>This is the week 34 of 86 journalers mentioned borrowing someone else's stainless kettle — at an office, at a friend's place — and noticing the difference for the first time. The water cools too fast. The pour is too aggressive. It's not that stainless is bad. It's that you've recalibrated what "right" feels like.</p>
+</li>
+<li>
+<h3>Week 8: It's Just Your Kettle Now</h3>
+<p>No fireworks. No epiphany. You just make better coffee than you did two months ago, and you don't think about your kettle anymore — which is the whole point. 79 of 86 journalers said they would not switch back. The other 7 said they missed induction compatibility (fair — Loom doesn't work on induction).</p>
+<p>The Shigaraki clay develops a faint patina from mineral deposits over time. Jim, our inspector, calls it "the kettle earning its keep." It's cosmetic. It washes off if you want it to. Most people don't.</p>
+</li>
+</ol>
+</section>
+
+<section class="lf-comparison">
+<h2>The Loom Standard vs. Everything Else on Your Counter</h2>
+<p>We tested against the three kettles most likely sitting in your kitchen right now. Here's what the numbers say — not marketing copy, just thermometer readings and a stopwatch.</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Loom Standard ($89)</th>
+<th>Fellow Stagg ($95)</th>
+<th>Hario Buono ($68)</th>
+<th>Generic Stainless ($35)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Temp at 90 seconds post-boil (SCA Portland test, Nov 2023)</td>
+<td>✓ 201°F</td>
+<td>✗ 194°F</td>
+<td>✗ 188°F</td>
+<td>✗ 184°F</td>
+</tr>
+<tr>
+<td>Double-wall air gap insulation</td>
+<td>✓ 4 mm ceramic air pocket</td>
+<td>✗ Single-wall steel</td>
+<td>✗ Single-wall steel</td>
+<td>✗ Single-wall steel</td>
+</tr>
+<tr>
+<td>Heat loss rate per minute</td>
+<td>✓ ~2°F/min</td>
+<td>✗ ~4°F/min</td>
+<td>✗ ~5°F/min</td>
+<td>✗ ~6°F/min</td>
+</tr>
+<tr>
+<td>Pour flow rate (for 15g–30g doses)</td>
+<td>✓ ~3 ml/sec (patent-pending interior ridge)</td>
+<td>✗ ~5 ml/sec</td>
+<td>✗ ~6 ml/sec</td>
+<td>✗ ~9 ml/sec (uncontrolled)</td>
+</tr>
+<tr>
+<td>Time in pour-temp window (196°F–205°F)</td>
+<td>✓ 4+ minutes — bloom, pour, bloom, pour</td>
+<td>✗ ~2 minutes</td>
+<td>✗ ~90 seconds</td>
+<td>✗ ~60 seconds</td>
+</tr>
+<tr>
+<td>Handle material</td>
+<td>✓ Steam-bent cherry wood (Sisters, OR)</td>
+<td>✗ Rubberized plastic</td>
+<td>✗ Rubberized plastic</td>
+<td>✗ Welded steel (hot to touch)</td>
+</tr>
+<tr>
+<td>Requires app or Bluetooth</td>
+<td>✓ No — just fire and pour</td>
+<td>✗ Optional (EKG model needs it)</td>
+<td>✓ No</td>
+<td>✓ No</td>
+</tr>
+<tr>
+<td>Handmade, batch-limited production</td>
+<td>✓ 1,000 per batch, hand-thrown in Portland</td>
+<td>✗ Mass-produced</td>
+<td>✗ Mass-produced</td>
+<td>✗ Mass-produced</td>
+</tr>
+</tbody>
+</table>
+<figure>
+<img src="/uploads/brand/cmnunamec0000zsuf0cj3t8tk/statics/seed-static-comparison.png" alt="Side-by-side comparison of the Loom Standard ceramic kettle and a generic stainless steel kettle" />
+<figcaption>Left: Loom Standard, Shigaraki stoneware fired at 1,280°C. Right: the stainless kettle it replaces.</figcaption>
+</figure>
+<p>At $89 — that's $0.24 per day over a year of morning pours — the Loom Standard costs less per brew than a single bag of Counter Culture beans. And it ships with a free bamboo coaster and linen dust cover. Only 312 units remain from the Winter 2026 batch.</p>
+<a class="lf-cta-btn" href="#pricing">Get the Loom Standard — $89 (Was $129) · Free Shipping</a>
+</section>
+
+<section class="lf-pricing-tiers">
+
+<div class="lf-tier">
+<h3>Single Kettle</h3>
+<p><s>$129.00</s></p>
+<p>$89.00</p>
+<p>Save $40</p>
+<ul>
+<li>1 Loom Standard Ceramic Kettle</li>
+<li>Free bamboo coaster</li>
+<li>Free linen dust cover</li>
+<li>Free shipping</li>
+<li>60-day money-back guarantee</li>
+</ul>
+<p>$89.00 per kettle</p>
+<a href="#" class="lf-cta-btn">Order 1 Kettle — $89</a>
+</div>
+
+<div class="lf-tier lf-tier-popular" data-popular="true">
+<h3>Most Popular</h3>
+<h4>3-Kettle Bundle</h4>
+<p><s>$387.00</s></p>
+<p>$227.00</p>
+<p>Save $160 total</p>
+<ul>
+<li>3 Loom Standard Ceramic Kettles</li>
+<li>3 bamboo coasters + 3 linen dust covers</li>
+<li>Free shipping</li>
+<li>60-day money-back guarantee</li>
+<li>Perfect for gifting — 68% of bundle buyers ship to 2+ addresses</li>
+</ul>
+<p>$75.67 per kettle — save 15% per unit</p>
+<a href="#" class="lf-cta-btn">Order 3 Kettles — $227</a>
+</div>
+
+<div class="lf-tier">
+<h3>Best Value</h3>
+<h4>6-Kettle Bundle</h4>
+<p><s>$774.00</s></p>
+<p>$374.00</p>
+<p>Save $400 total</p>
+<ul>
+<li>6 Loom Standard Ceramic Kettles</li>
+<li>6 bamboo coasters + 6 linen dust covers</li>
+<li>Free shipping</li>
+<li>60-day money-back guarantee</li>
+<li>Popular with offices and coffee clubs — ships in one box or split to 6 addresses</li>
+</ul>
+<p>$62.33 per kettle — save 30% per unit</p>
+<a href="#" class="lf-cta-btn">Order 6 Kettles — $374</a>
+</div>
+
+<p>Only 312 units remain from the 1,000-unit Winter 2026 batch. All orders ship in 2–4 business days from Portland, OR.</p>
+
+</section>
+
+<section class="lf-guarantee">
+<h2>60-Day Money-Back Guarantee — No Questions, No Hassle</h2>
+<p>Brew with the Loom Standard for a full 60 days. If the pour doesn't feel right, if the temperature retention doesn't match what we've claimed, or if you simply decide ceramic isn't for you — email us at returns@loomkettle.co and we'll refund every penny within 5 business days.</p>
+<p>You don't need to explain. You don't need to fill out a form. Ship it back in the original box (we include a prepaid return label), and your $89 is back in your account before the week is out.</p>
+<p>We can offer this because fewer than 3.1% of buyers have returned a Loom Standard since our first batch in 2023. Most of those were gifted buyers who received a duplicate. The people who brew with it keep it.</p>
+</section>
+
+<section class="lf-final-cta">
+<h2>312 kettles left from the Winter 2026 batch. The next firing isn't until fall.</h2>
+<p>$89 today — was $129. Free shipping. Free bamboo coaster + linen dust cover included.</p>
+<a class="lf-cta-btn" href="#">Get the Loom Standard for $89</a>
+<p>Join 4,216 pour-over brewers who've already made the switch. Every order backed by our 60-day money-back guarantee — no questions, no forms, just a refund.</p>
+</section>
+
+<section class="lf-footer"><p>The Loom Standard is a ceramic kettle designed for pour-over coffee preparation. Individual brewing results depend on grind size, water quality, technique, and bean freshness. Temperature retention data based on independent testing conducted at SCA Portland, November 2023. Loom Ceramic Kettle Co. · Made in Portland, OR.</p><nav><a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms &amp; Conditions</a> · <a href="/contact">Contact</a></nav></section>
+</main>
+
+<div class="lf-trust-strip" aria-label="Trust signals">
+  <span>🔒 Secure checkout</span>
+  <span>✓ 60-day guarantee</span>
+  <span>🚚 Free shipping</span>
+  <span>★ 4.8/5 rated</span>
+</div>
+</body>
+</html>

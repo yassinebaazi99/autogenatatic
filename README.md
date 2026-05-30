@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nivara (landing-forge)
 
-## Getting Started
+Creative workflow tool for paid-social: brand knowledge base, static ads, and
+landers — all agent-driven. Local-first (SQLite + on-disk uploads), single-user.
 
-First, run the development server:
+## Quick start
+
+Requires **Node.js 20+**. Then, from this folder:
+
+### macOS / Linux
 
 ```bash
+chmod +x setup.sh && ./setup.sh
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Windows (PowerShell)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```powershell
+.\setup.ps1
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Or, on any platform: `npm run setup && npm run dev`.
 
-## Learn More
+Then open <http://localhost:3000>, and add your `ANTHROPIC_API_KEY` /
+`GOOGLE_API_KEY` to `.env.local` to enable AI features.
 
-To learn more about Next.js, take a look at the following resources:
+Re-running setup is safe — it's non-destructive and keeps your existing data and
+generated statics.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See **[INSTALL.md](INSTALL.md)** for full instructions, options, and troubleshooting.

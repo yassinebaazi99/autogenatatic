@@ -1,0 +1,180 @@
+{
+  "landerId": "cmnuwr09p00012sufa4v4r33t",
+  "slug": "9habmo-d5f055",
+  "title": "9habmo",
+  "landerType": "advertorial",
+  "preset": "clinical",
+  "rebuiltAt": "2026-04-11T22:30:22.626Z",
+  "sections": [
+    {
+      "sectionId": "urgency-banner",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3861,
+      "outputTokens": 42,
+      "error": null
+    },
+    {
+      "sectionId": "editorial-headline",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3864,
+      "outputTokens": 61,
+      "error": null
+    },
+    {
+      "sectionId": "byline",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3813,
+      "outputTokens": 44,
+      "error": null
+    },
+    {
+      "sectionId": "hero-image",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3827,
+      "outputTokens": 149,
+      "error": null
+    },
+    {
+      "sectionId": "opening-hook",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3841,
+      "outputTokens": 395,
+      "error": null
+    },
+    {
+      "sectionId": "star-rating-interrupter",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3798,
+      "outputTokens": 48,
+      "error": null
+    },
+    {
+      "sectionId": "pain-escalation",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3842,
+      "outputTokens": 517,
+      "error": null
+    },
+    {
+      "sectionId": "root-cause",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3888,
+      "outputTokens": 770,
+      "error": null
+    },
+    {
+      "sectionId": "product-reveal",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3831,
+      "outputTokens": 590,
+      "error": null
+    },
+    {
+      "sectionId": "ingredient-cards",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3828,
+      "outputTokens": 757,
+      "error": null
+    },
+    {
+      "sectionId": "social-proof",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3851,
+      "outputTokens": 939,
+      "error": null
+    },
+    {
+      "sectionId": "results-timeline",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3795,
+      "outputTokens": 825,
+      "error": null
+    },
+    {
+      "sectionId": "comparison-table",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3803,
+      "outputTokens": 1111,
+      "error": null
+    },
+    {
+      "sectionId": "pricing-tiers",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3931,
+      "outputTokens": 701,
+      "error": null
+    },
+    {
+      "sectionId": "guarantee",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3823,
+      "outputTokens": 231,
+      "error": null
+    },
+    {
+      "sectionId": "final-cta",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3806,
+      "outputTokens": 155,
+      "error": null
+    },
+    {
+      "sectionId": "footer",
+      "status": "done",
+      "locked": false,
+      "hasUserEdit": false,
+      "model": "claude-opus-4-6",
+      "promptTokens": 3793,
+      "outputTokens": 131,
+      "error": null
+    }
+  ]
+}
